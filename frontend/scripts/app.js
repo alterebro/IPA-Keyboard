@@ -49,7 +49,7 @@ var maps = {
 		'w': ['₩'],
 		'y': ['¥']
 	},
-	'simple' : {
+	'IPA-simple' : {
 		'A' : ['E','I','O','U'],
 		'a' : ['ɑ','á','à','â','æ'],
 		'e' : ['ɛ','ə','é','è','ê','ë'],
@@ -57,7 +57,7 @@ var maps = {
 		'o' : ['ó','ɔ','ø','œ','ô'],
 		'u' : ['ú','y','ù','û','ü','ÿ']
 	},
-	'full' : {
+	'IPA-full' : {
 		'a' : ['æ', 'ɐ', 'ɑ', 'ɒ', 'α', 'ã', 'ă'],
 		'b' : ['β', 'ɓ'],
 		'c' : ['ç', 'č', 'ɕ'],
@@ -105,7 +105,7 @@ var maps = {
 
 var data = {
 	maps : maps,
-	current_keymap : 'simple',
+	current_keymap : 'IPA-simple',
 	input : 'write here...',
 
 	keymap : null,
@@ -113,7 +113,12 @@ var data = {
 
 	helper_chars : [],
 	helper_chars_current : -1,
-	helper_chars_origin : null
+	helper_chars_origin : null,
+
+	helper_coordinates : {
+		top : 0,
+		left : 0
+	}
 };
 
 var started = 0;
@@ -135,7 +140,15 @@ var app = new Vue({
 	filters : {},
 	methods : {
 		onKeyDown : function() {},
-		onKeyPress : function() {},
+		onKeyPress : function() {
+
+			var elem = document.querySelector('#data-input');
+			this.helper_coordinates = getCaretCoordinates(elem, elem.selectionEnd);
+			this.helper_coordinates.top += 30;
+			this.helper_coordinates.left += 20;
+			console.log('top: ', this.helper_coordinates.top, ' - left: ', this.helper_coordinates.left);
+
+		},
 		onKeyUp : function() {},
 
 		setMap : function(param) {
@@ -148,6 +161,7 @@ var app = new Vue({
 			this.input = data.input.substr(0,s) + c + data.input.substr(s);
 			this.setCaret(s+1);
 			document.querySelector('#data-input').focus();
+			this.closeHelper();
 		},
 
 		setCaret : function(pos) {

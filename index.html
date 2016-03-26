@@ -23,20 +23,24 @@
 	></textarea>
 	<p>{{ output }}</p>
 
-	<div v-if="helper_chars.length" transition="dissolve">
-		<strong>Press tab &#8677; to cycle through special chars list : </strong>
-		<template v-for="c in helper_chars">
-			<button
-				@click="addChar(c)"
-				:class="helper_chars[helper_chars_current] == c ? 'current' : ''">
-				{{ c }}
-			</button>
-		</template>
+	<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
+		<dl>
+			<dt>Press tab &#8677; to cycle through</dt>
+			<dd>
+				<template v-for="c in helper_chars">
+					<button
+						@click="addChar(c)"
+						:class="helper_chars[helper_chars_current] == c ? 'current' : ''">
+						{{ c }}
+					</button>
+				</template>
+			</dd>
+		</dl>
 	</div>
 </main>
 
 <aside>
-	<h3>Maps</h3>
+	<h3>Keyboard Mapping : {{ current_keymap }}</h3>
 	<ul>
 		<li v-for="map in maps">
 			<label>
@@ -51,18 +55,17 @@
 			</label>
 		</li>
 	</ul>
-
-	<h3>current: {{ current_keymap }}</h3>
-	<ul>
+	<ul id="characters-mapped">
 		<li v-for="k in keymap">
 			<button @click="addChar($key)">{{ $key }}</button> :
 				<template v-for="i in k">
-				<button @click="addChar(i)">{{ i }}</button>
+				<button @click="addChar(i)"><strong>{{ i }}</strong></button>
 				</template>
 		</li>
 	</ul>
 </aside>
 
+<script type="text/javascript" src="frontend/scripts/textarea-caret-position.js"></script>
 <script type="text/javascript" src="frontend/scripts/mousetrap-1.5.3.min.js"></script>
 <script type="text/javascript" src="frontend/scripts/vue.js"></script>
 <script type="text/javascript" src="frontend/scripts/app.js"></script>
