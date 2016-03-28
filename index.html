@@ -14,56 +14,75 @@
 </head>
 <body>
 
-<main>
-	<textarea id="data-input" rows="10" cols="40"
-		v-model="input"
-		@keyup="onKeyUp"
-		@keypress="onKeyPress"
-		@keydown="onKeyDown"
-	></textarea>
-	<p>{{ output }}</p>
+<header>
+	<h1><strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols</h1>
+	<dl>
+		<dt>Type : <strong>{{ current_keymap }}</strong></dt>
+		<dd>
+			<ul>
+				<li v-for="map in maps">
+					<label>
+						<input
+							type="radio"
+							name="current-map"
+							@click="setMap($key)"
+							v-model="current_keymap"
+							v-bind:id="'current-map-'+$key"
+							v-bind:value="$key" />
+						{{ $key }}
+					</label>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</header>
 
-	<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
-		<dl>
-			<dt>Press tab &#8677; to cycle through</dt>
-			<dd>
-				<template v-for="c in helper_chars">
-					<button
-						@click="addChar(c)"
-						:class="helper_chars[helper_chars_current] == c ? 'current' : ''">
-						{{ c }}
-					</button>
-				</template>
-			</dd>
-		</dl>
-	</div>
+
+<main>
+	<section>
+		<textarea id="data-input" rows="10" cols="40"
+			v-model="input"
+			@keyup="onKeyUp"
+			@keypress="onKeyPress"
+			@keydown="onKeyDown"
+		></textarea>
+		<p>{{ output }}</p>
+
+		<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
+			<dl>
+				<dt>Press tab &#8677; to cycle through</dt>
+				<dd>
+					<template v-for="c in helper_chars">
+						<button
+							@click="addChar(c)"
+							:class="helper_chars[helper_chars_current] == c ? 'current' : ''">
+							{{ c }}
+						</button>
+					</template>
+				</dd>
+			</dl>
+		</div>
+	</section>
+	<aside>
+		<div id="sidebar">
+			<ul id="characters-mapped">
+				<li v-for="k in keymap">
+					<button @click="addChar($key)">{{ $key }}</button> :
+						<template v-for="i in k">
+						<button @click="addChar(i)"><strong>{{ i }}</strong></button>
+						</template>
+				</li>
+			</ul>
+			<div id="ad">
+				[[ ad here ]]
+			</div>
+		</div>
+	</aside>
 </main>
 
-<aside>
-	<h3>Keyboard Mapping : {{ current_keymap }}</h3>
-	<ul>
-		<li v-for="map in maps">
-			<label>
-				<input
-					type="radio"
-					name="current-map"
-					@click="setMap($key)"
-					v-model="current_keymap"
-					v-bind:id="'current-map-'+$key"
-					v-bind:value="$key" />
-				{{ $key }}
-			</label>
-		</li>
-	</ul>
-	<ul id="characters-mapped">
-		<li v-for="k in keymap">
-			<button @click="addChar($key)">{{ $key }}</button> :
-				<template v-for="i in k">
-				<button @click="addChar(i)"><strong>{{ i }}</strong></button>
-				</template>
-		</li>
-	</ul>
-</aside>
+<footer>
+	<p>Design and development: <a href="https://twitter.com/alterebro">@alterebro</a></p>
+</footer>
 
 <script type="text/javascript" src="frontend/scripts/textarea-caret-position.js"></script>
 <script type="text/javascript" src="frontend/scripts/mousetrap-1.5.3.min.js"></script>

@@ -19,86 +19,466 @@
     font-style: normal;
 }
 
+
+/*!	armazon.css v0.3.1 - Lightweight and Supersimple CSS3 Boilerplate Micro Framework built on LESS
+ 	(c) 2016 Jorge Moreno ( @alterebro ) - MIT License - https://github.com/alterebro/armazon.css
+*/
+// --------------------------------------------
+// Variables @less
+@armazon-mobile-breakpoint 		: 580;		// width to filter mobile devices
+@armazon-desktop-breakpoint 	: 960; 		// width to fire desktop layout filtering
+@armazon-margin 				: 3.6rem; 	// Global margin
+@armazon-color-background 		: #304352;	// Global Background Color
+@armazon-color-foreground 		: #d7d2cc; 	// Global Foreground & Text Color
+@armazon-color-primary 			: #cdc83c; 	// Links and Buttons Color
+
+@armazon-color-neutral 			: #a0a0a0; 	// Neutral Grey
+
+/*
+	#135058, #F1F2B5
+	#304352, #d7d2cc;
+*/
+
+
+// --------------------------------------------
+// Media Queries
+@mobile 	: ~"all and (max-width: @{armazon-mobile-breakpoint}px)"; 	// Default
+@non-mobile : ~"all and (min-width: @{armazon-mobile-breakpoint}px)"; 	// Matchs both @tablet and @desktop
+@tablet 	: ~"all and (min-width: @{armazon-mobile-breakpoint}px) and (max-width: @{armazon-desktop-breakpoint}px)";
+@desktop 	: ~"all and (min-width: @{armazon-desktop-breakpoint}px)";
+
+// --------------------------------------------
+// Mixins @less
+.transition( @value : all 0.25s ease-out) {
+	-webkit-transition: @value;
+	transition: @value;
+}
+
+// --------------------------------------------
+// Global
 html, body {
 	margin: 0;
 	padding: 0;
-	height: 100%;
-	background: #f0f0f0;
-	color: #444;
 }
-html, body, textarea, button {
-	font-family: 'dejavusans', 'Voces', sans-serif;
-	font-size: 14px;
+html {
+	font-family: sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	box-sizing: border-box;
+	font-size: 62.5%;
 }
-body {}
-textarea {
-	padding: 20px;
-	width: 100%;
-	height: 90%;
-	font-size: 18px;
-	resize: none;
-	&:focus { outline: none;}
+body {
+	font-size: 1.6em;
+	line-height: 1.5;
+	background: @armazon-color-background;
+	color: @armazon-color-foreground;
 }
-main {
-	float: left;
-	width: 70%;
-	height: 100%;
-}
-aside {
-	float: right;
-	width: 25%;
+*, *:before, *:after {
+	box-sizing: inherit;
 }
 
-ul {
+// --------------------------------------------
+// HTML5 display definitions
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+	display: block;
+}
+[hidden], template {
+	display: none;
+}
+
+// --------------------------------------------
+// Links
+a {
+	background-color: transparent;
+	text-decoration: none;
+	color: @armazon-color-primary;
+	border-bottom: solid transparent 1px;
+}
+a:active, a:hover {
+	outline: 0;
+	color: @armazon-color-foreground;
+	border-bottom: solid @armazon-color-primary 1px;
+}
+a:focus{
+	outline: solid fade(@armazon-color-primary, 50%) 1px;
+	box-shadow: 0 0 5px 2px fade(@armazon-color-primary, 30%);
+}
+a, a * {
+	.transition();
+}
+// --------------------------------------------
+// Text-level semantics
+abbr[title], acronym[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+b, strong {
+	font-weight: bold;
+}
+dfn {
+	font-style: italic;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+blockquote {
+	quotes: "\201C""\201D""\2018""\2019";
+	&:before {
+		color: @armazon-color-neutral;
+		font-size: 4rem;
+		line-height: 0.1em;
+		padding: 0 .25rem;
+	}
+	&:before {
+		content: open-quote;
+		vertical-align: -1rem;
+	}
+	p { display: inline; }
+}
+
+
+// --------------------------------------------
+// Forms
+// --- Buttons --------------------------------
+button,
+textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+button {
+	overflow: visible;
+	text-transform: none;
+}
+button,
+html input[type="button"],
+input[type="button"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	color: @armazon-color-background;
+	background: @armazon-color-primary;
+	border: none;
+	white-space: nowrap;
+	border-radius: 3px;
+	vertical-align: top;
+	height: 4rem;
+	width: 4rem;
+	line-height: 4rem;
+	margin: 2px;
+	.transition();
+}
+.button:hover, .button:focus, .boton:hover, .boton:focus,
+button:hover, button:focus,
+html input[type="button"]:hover, html input[type="button"]:focus,
+input[type="button"]:hover, input[type="button"]:focus,
+input[type="reset"]:hover, input[type="reset"]:focus,
+input[type="submit"]:hover, input[type="submit"]:focus {
+	text-decoration: none;
+	background: @armazon-color-foreground;
+	color: @armazon-color-background;
+	border: none;
+	outline: 0;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+input {
+	line-height: normal;
+}
+
+// --- Input Elements -------------------------
+input[type="checkbox"],
+input[type="radio"] {
+	padding: 0;
+	display: inline;
+}
+label {
+	display: block;
+}
+
+
+// --------------------------------------------
+// Lists
+ol, ul {
+	padding: 0 0 0 @armazon-margin/2;
+	margin: 0 0 @armazon-margin @armazon-margin/2;
+
+	li {
+		padding: .1rem 0;
+	}
+}
+ul ul, ul ol, ol ol, ol ul {
+	margin: .5rem @armazon-margin/4;
+}
+dl {
+	dt dfn {
+		font-style: normal;
+	}
+	dt:before {
+		content: '\25b6\00a0';
+		display: inline-block;
+		vertical-align: middle;
+		color: @armazon-color-primary;
+		padding: 0 .25rem;
+		font-size: .9rem;
+	}
+	dd {
+		margin: 0;
+		padding: 0;
+		color: @armazon-color-neutral;
+	}
+}
+
+
+// --------------------------------------------
+// Spacing
+/*
+button, .button, input, textarea, select, fieldset {
+	margin: 0 0 1rem 0;
+}
+h1, h2, h3, h4, h5, h6, p, pre {
+	margin: 0 0 (@armazon-margin/2) 0;
+}
+blockquote, figure, table, dl, form {
+	margin: 0 0 @armazon-margin 0;
+}
+*/
+
+// --------------------------------------------
+// Pseudo-elements
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+
+
+// armazon.css eof
+// --------------------------------------------
+// --------------------------------------------
+// Author's custom styles :
+
+
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+body {
+	background-color: #304352;
+	// background-image: radial-gradient(circle at 70% 100%, #c7c2ac, transparent 80%);
+	// background-image: radial-gradient(circle at 80% 100%, #a7a27c, transparent 100%);
+	background-image: radial-gradient(circle at 70% 100%, #97927c, transparent 100%);
+	background-size: cover;
+}
+
+body > * {
+	font-family: 'dejavusans', 'Voces', sans-serif;
+	font-size: 1.4rem;
+	font-weight: 300;
+}
+
+@ui-margin : 20px;
+@ui-header-height : 60px;
+@ui-footer-height : 50px;
+@ui-sidebar-width : 300px + (@ui-margin);
+
+h1, dl, dt, dd, ul, li, p {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
-button {
-	width: 36px;
-	height: 36px;
-	background: #ccc;
-	color: #222;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
-	border: solid #ccc 1px;
-	border-radius: 3px;
-	margin: 2px;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
-	cursor: pointer;
-}
-button:hover {
-	background: #ddd;
-	color: #000;
-}
-.current { border: solid #222 2px; }
 
-
-#helper {
-	display: inline-block;
-	width: auto;
+header {
+	z-index: 2;
 	position: absolute;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: @ui-header-height;
+	border-bottom: dotted rgba(255, 255, 255, .2) 1px;
 
-	dl, dt, dd {
-		margin: 0;
-		padding: 0;
+	h1 {
+		display: inline-block;
+		font-size: 1.4rem;
+		font-weight: normal;
+		line-height: @ui-header-height;
+		padding: 0 0 0 @ui-margin + 5px;
+
+		strong {
+			font-weight: bold;
+			color: #fff;
+		}
 	}
+
 	dl {
-		border-radius: 5px;
-		padding: 10px;
-		width: 100%;
-		background: #fff;
-		border: solid #ccc 1px;
-		box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .1);
-		position: relative;
-		margin-left: -50%;
+		box-shadow:
+			inset 0 3px 0 0 @armazon-color-primary,
+			inset 0 4px 0 0 rgba(0, 0, 0, .1),
+			inset 0 5px 0 0 rgba(0, 0, 0, .1),
+			inset 0 -1px 0 0 rgba(0, 0, 0, .1)
+		;
+		float: right;
+		width: @ui-sidebar-width;
+		background: rgba(0, 0, 0, .1);
+
 		dt {
-			font-size: 70%;
+			height: @ui-header-height - 1px;
+			line-height: @ui-header-height  - 1px;
+			padding: 0 0 0 @ui-margin;
+		}
+		dd {
+			display: none;
+			position: absolute;
+			padding: @ui-margin;
+			width: @ui-sidebar-width;
+			background: @armazon-color-background;
+
+			ul {
+				li {
+					label {
+						cursor: pointer;
+						background: #333;
+					}
+				}
+			}
+		}
+
+		&:hover {
+			background: @armazon-color-background;
+			dd {
+				display: block;
+			}
 		}
 	}
 }
 
+main {
+	width: 100%;
+	height: 100%;;
+	padding: @ui-header-height 0 @ui-footer-height 0;
+
+	section {
+		width: 100%;
+		height: 100%;
+		padding: @ui-margin (@ui-sidebar-width + @ui-margin) @ui-margin @ui-margin;
+		position: relative;
+
+		textarea {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			background: #fff;
+			color: @armazon-color-background;
+			border: none;
+			border-radius: none;
+			display: block;
+			vertical-align: top;
+			width: 100%;
+			height: 100%;
+			padding: @ui-margin;
+			overflow: auto;
+			resize: none;
+			.transition();
+
+			font-size: 18px;
+			box-shadow:
+				0 2px 40px 5px rgba(0, 0, 0, .1),
+				0 1px 0 1px rgba(0, 0, 0, .1)
+			;
+		}
+		textarea:focus {
+			border: none;
+			outline: 0;
+		}
+
+		#helper {
+			display: inline-block;
+			width: auto;
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			dl {
+				border-radius: 5px;
+				padding: 10px;
+				width: 100%;
+				background: #fff;
+				border: solid #ccc 1px;
+				box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .1);
+				position: relative;
+				margin-left: -50%;
+				dt {
+					font-size: 70%;
+				}
+			}
+		}
+
+	}
+
+	aside {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: @ui-sidebar-width;
+		height: 100%;
+		padding: (@ui-header-height + @ui-margin) @ui-margin (@ui-footer-height + @ui-margin) 0;
+		overflow: hidden;
+
+		#sidebar {
+			height: 100%;
+			overflow: auto;
+		}
+
+		#ad {
+			display: none;
+			margin-top: @ui-margin;
+			width: 300px;
+			height: 250px;
+			background: rgba(0, 0, 0, .2);
+		}
+	}
+}
+
+footer {
+	z-index: 1;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	line-height: @ui-footer-height - 5px;
+	height: @ui-footer-height;
+	width: 100%;
+	border-top: dotted rgba(255, 255, 255, .2) 1px;
+	padding: 0 (@ui-margin + 5px);
+
+	font-size: 75%;
+	a {
+		font-weight: bold;
+	}
+}
+
+.current { border: solid #222 2px; }
 .dissolve-transition {
 //	position: absolute;
 //	top: 5px;
@@ -110,6 +490,7 @@ button:hover {
 //	top: -5px;
 }
 
+/*
 #characters-mapped {
 
 	margin: 20px 0 0 0;
@@ -121,3 +502,4 @@ button:hover {
 		background: #fafafa;
 	}
 }
+*/
