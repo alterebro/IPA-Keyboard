@@ -14,31 +14,11 @@
 </head>
 <body>
 
-<header>
-	<h1><strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols</h1>
-	<dl>
-		<dt>Type : <strong>{{ current_keymap }}</strong></dt>
-		<dd>
-			<ul>
-				<li v-for="map in maps">
-					<label>
-						<input
-							type="radio"
-							name="current-map"
-							@click="setMap($key)"
-							v-model="current_keymap"
-							v-bind:id="'current-map-'+$key"
-							v-bind:value="$key" />
-						{{ $key }}
-					</label>
-				</li>
-			</ul>
-		</dd>
-	</dl>
-</header>
+<div id="main">
+	<header>
+		<h1><strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols</h1>
+	</header>
 
-
-<main>
 	<section>
 		<textarea id="data-input" rows="10" cols="40"
 			v-model="input"
@@ -63,26 +43,43 @@
 			</dl>
 		</div>
 	</section>
-	<aside>
-		<div id="sidebar">
-			<ul id="characters-mapped">
-				<li v-for="k in keymap">
-					<button @click="addChar($key)">{{ $key }}</button> :
-						<template v-for="i in k">
-						<button @click="addChar(i)"><strong>{{ i }}</strong></button>
-						</template>
-				</li>
-			</ul>
-			<div id="ad">
-				[[ ad here ]]
-			</div>
-		</div>
-	</aside>
-</main>
 
-<footer>
-	<p>Design and development: <a href="https://twitter.com/alterebro">@alterebro</a></p>
-</footer>
+	<footer>
+		<p>Design and development: <a href="https://twitter.com/alterebro">@alterebro</a></p>
+	</footer>
+</div>
+
+<div id="sidebar">
+	<aside>
+		<dl>
+			<dt><dfn>Type : <strong>{{ current_keymap }}</strong></dfn></dt>
+			<dd>
+				<ul>
+					<li v-for="map in maps">
+						<label>
+							<input
+								type="radio"
+								name="current-map"
+								@click="setMap($key)"
+								v-model="current_keymap"
+								v-bind:id="'current-map-'+$key"
+								v-bind:value="$key" />
+							{{ $key }}
+						</label>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+
+		<ul id="characters-mapped">
+			<li v-for="k in keymap">
+				<button @click="addChar($key)" class="char-trigger">{{ $key }}</button>
+				<template v-for="i in k"><button @click="addChar(i)" class="char-item">{{ i }}</button></template>
+			</li>
+		</ul>
+		<div id="ad">[[ ad here ]]</div>
+	</aside>
+</div>
 
 <script type="text/javascript" src="frontend/scripts/textarea-caret-position.js"></script>
 <script type="text/javascript" src="frontend/scripts/mousetrap-1.5.3.min.js"></script>

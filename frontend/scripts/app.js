@@ -112,7 +112,7 @@ var maps = {
 
 var data = {
 	maps : maps,
-	current_keymap : 'IPA-simple',
+	current_keymap : 'IPA-full',
 	input : 'write here...',
 
 	keymap : null,
@@ -151,7 +151,7 @@ var app = new Vue({
 
 			var elem = document.querySelector('#data-input');
 			this.helper_coordinates = getCaretCoordinates(elem, elem.selectionEnd);
-			this.helper_coordinates.top += 50;
+			this.helper_coordinates.top += 90;
 			this.helper_coordinates.left += 30;
 			console.log('top: ', this.helper_coordinates.top, ' - left: ', this.helper_coordinates.left);
 
