@@ -113,7 +113,7 @@ var maps = {
 var data = {
 	maps : maps,
 	current_keymap : 'IPA-full',
-	input : 'write here...',
+	input : '',
 
 	keymap : null,
 	output : '',

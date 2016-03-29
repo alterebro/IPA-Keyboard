@@ -9,6 +9,7 @@
 	<meta name="MobileOptimized" content="320" />
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Voces&subset=latin,latin-ext" />
 	<link rel="stylesheet" type="text/css" href="frontend/styles/app.css" />
 </head>
@@ -16,7 +17,11 @@
 
 <div id="main">
 	<header>
-		<h1><strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols</h1>
+		<h1>
+			<i class="fa fa-fw fa-keyboard-o"></i>
+			<strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols.
+		</h1>
+		<p class="hamburguer-icon"><a href="#sidebar" title="Sidebar Display Switcher" onclick="alert('nothing yet...'); return false;"><span>&#x2261;</span></a></p>
 	</header>
 
 	<section>
@@ -25,6 +30,7 @@
 			@keyup="onKeyUp"
 			@keypress="onKeyPress"
 			@keydown="onKeyDown"
+			placeholder="write here..."
 		></textarea>
 		<p>{{ output }}</p>
 
@@ -45,7 +51,17 @@
 	</section>
 
 	<footer>
-		<p>Design and development: <a href="https://twitter.com/alterebro">@alterebro</a></p>
+		<p>
+			Design &amp; development by <strong>Jorge Moreno</strong>
+			aka <a href="http://moro.es" target="_blank" title="Jorge Moreno aka Moro. Front End Web Developer and UI Designer. Zaragoza, Spain">moro</a>.
+			( <a href="https://twitter.com/alterebro" target="_blank" title="@alterebro. Web Development and Design">@alterebro</a> )
+		</p>
+		<ul>
+			<li><a href="#" title="Share on Twitter" onclick="alert('nothing yet...'); return false;"><i class="fa fa-twitter"></i> <span>Share on Twitter</span></a></li>
+			<li><a href="#" title="Share on FaceBook" onclick="alert('nothing yet...'); return false;"><i class="fa fa-facebook"></i> <span>Share on FaceBook</span></a></li>
+			<li><a href="#" title="Share on Google+" onclick="alert('nothing yet...'); return false;"><i class="fa fa-google-plus"></i> <span>Share on GooglePlus</span></a></li>
+			<li><a href="#" title="Share on LinkedIn" onclick="alert('nothing yet...'); return false;"><i class="fa fa-linkedin"></i> <span>Share on LinkedIn</span></a></li>
+		</ul>
 	</footer>
 </div>
 

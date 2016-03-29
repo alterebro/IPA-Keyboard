@@ -48,7 +48,7 @@
 
 // --------------------------------------------
 // Mixins @less
-.transition( @value : all 0.25s ease-out) {
+.transition( @value : all 0.2s ease-out) {
 	-webkit-transition: @value;
 	transition: @value;
 }
@@ -95,7 +95,8 @@ a {
 }
 a:active, a:hover {
 	outline: 0;
-	color: @armazon-color-foreground;
+//	color: @armazon-color-foreground;
+	color: #fff;
 	border-bottom: solid @armazon-color-primary 1px;
 }
 a, a * {
@@ -208,6 +209,7 @@ body {
 }
 body > * {
 	font-family: 'dejavusans', 'Voces', sans-serif;
+//	font-family: 'Voces', sans-serif;
 	font-size: 1.4rem;
 	font-weight: normal;
 }
@@ -241,10 +243,38 @@ body {
 	        text-overflow: ellipsis;
 			font-size: 1.4rem;
 			font-weight: normal;
+			padding: 0 @ui-header-height 0 0;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
 
 			strong {
 				font-weight: bold;
 				color: #fff;
+			}
+			i {
+				color: @armazon-color-primary;
+			}
+		}
+
+		p.hamburguer-icon {
+			position: absolute;
+			top: 0;
+			right: @ui-margin;
+
+			a {
+				display: block;
+				height: @ui-header-height;
+				width: @ui-header-height - 20px;
+				overflow: hidden;
+				border: none;
+				text-align: center;
+				text-shadow: 0 -1px 0 fade(#000, 15%);
+
+				span { display: none; }
+				&:before {
+					content: '\f0c9';
+					font-family: 'FontAwesome';
+					font-size: 1.6rem;
+				}
 			}
 		}
 
@@ -254,6 +284,7 @@ body {
 		width: 100%;
 		height: 100%;
 		padding: @ui-header-height @ui-margin @ui-footer-height;
+		overflow: hidden;
 
 		textarea {
 			-webkit-appearance: none;
@@ -267,6 +298,7 @@ body {
 			vertical-align: top;
 			width: 100%;
 			height: 100%;
+			min-width: 320px;
 			padding: @ui-margin;
 			overflow: auto;
 			resize: none;
@@ -288,7 +320,6 @@ body {
 		bottom: 0;
 		left: 0;
 		height: @ui-footer-height;
-		line-height: @ui-footer-height;
 		width: 100%;
 		padding: 0 @ui-margin + 5px;
 
@@ -296,12 +327,42 @@ body {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
 			font-size: 1.2rem;
+			line-height: @ui-footer-height;
+			padding: 0 ( (@ui-footer-height - 20px) * 4 ) 0 0; // 4 is N social icons
+			a { font-weight: bold; }
+		}
 
-			a {
-				font-weight: bold;
+		ul {
+			position: absolute;
+			top: 0;
+			right: @ui-margin;
+
+			li {
+				display: block;
+				float: left;
+				height: @ui-footer-height - 20px;
+				width: @ui-footer-height - 20px;
+				margin: 10px 0;
+				padding: 0;
+
+				a {
+					display: block;
+					height: @ui-footer-height - 20px;
+					line-height: @ui-footer-height - 20px;
+					width: @ui-footer-height - 20px;
+					text-align: center;
+					border: none;
+					color: @armazon-color-primary;
+					text-shadow: 0 -1px 0 fade(#000, 15%);
+
+					&:hover { color: #fff; }
+					span { display: none; }
+				}
 			}
 		}
+
 	}
 }
 #sidebar {
