@@ -125,7 +125,13 @@ var data = {
 	helper_coordinates : {
 		top : 0,
 		left : 0
-	}
+	},
+
+	aside_menu_type_open : false,
+	aside_menu_keys_open : true,
+	aside_menu_lang_open : false,
+
+	hide_sidebar : false
 };
 
 var started = 0;
@@ -146,6 +152,21 @@ var app = new Vue({
 	},
 	filters : {},
 	methods : {
+
+		toogle_sidebar : function() {
+			this.hide_sidebar = !this.hide_sidebar;
+		},
+
+		toggle_menu_type : function() {
+			this.aside_menu_type_open = !this.aside_menu_type_open;
+		},
+		toggle_menu_keys : function() {
+			this.aside_menu_keys_open = !this.aside_menu_keys_open;
+		},
+		toggle_menu_lang : function() {
+			this.aside_menu_lang_open = !this.aside_menu_lang_open;
+		},
+
 		onKeyDown : function() {},
 		onKeyPress : function() {
 

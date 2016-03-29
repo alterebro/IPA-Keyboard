@@ -74,6 +74,7 @@ body {
 }
 *, *:before, *:after {
 	box-sizing: inherit;
+	.transition();
 }
 
 // --------------------------------------------
@@ -213,7 +214,7 @@ body > * {
 	font-size: 1.4rem;
 	font-weight: normal;
 }
-h1, dl, dt, dd, ul, li, p {
+h1, h2, h3, dl, dt, dd, ul, li, p {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -223,6 +224,7 @@ h1, dl, dt, dd, ul, li, p {
 body {
 	padding: 0 @ui-sidebar-width 0 0;
 }
+
 #main {
 	width: 100%;
 	height: 100%;
@@ -356,6 +358,7 @@ body {
 					border: none;
 					color: @armazon-color-primary;
 					text-shadow: 0 -1px 0 fade(#000, 15%);
+					font-size: 1.6rem;
 
 					&:hover { color: #fff; }
 					span { display: none; }
@@ -365,10 +368,13 @@ body {
 
 	}
 }
+
+
 #sidebar {
 	position: absolute;
 	top: 0;
 	right: 0;
+
 	width: @ui-sidebar-width;
 	height: 100%;
 	overflow: auto;
@@ -380,75 +386,121 @@ body {
 		inset 3px 0 0 fade(#000, 10%)
 	;
 
-	padding: 0 @ui-margin;
+	padding: 0 @ui-margin @ui-margin @ui-margin;
+
+	h3 {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 1.4rem;
+		font-weight: normal;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+		height: @ui-header-height;
+		line-height: @ui-header-height;
+		padding: 0 40px 0 5px;
+		border-bottom: solid fade(#fff, 10%) 1px;
+		position: relative;
+		color: #fff;
+		cursor: default;
+
+		&:after {
+			content: '\f0ad';
+			font-family: 'FontAwesome';
+			font-size: 1.2rem;
+			display: block;
+			position: absolute;
+			top: (@ui-header-height - 40px) / 2;
+			right: 0;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			color: @armazon-color-primary;
+		}
+
+	}
+
 }
+
+
+body.no-sidebar {
+	padding: 0;
+
+	#sidebar {
+		width: 0;
+		padding: 0;
+	}
+}
+
 
 #sidebar {
 
 	dl {
-		padding: @ui-margin 0;
-		cursor: pointer;
+
+		width: @ui-sidebar-width - (@ui-margin * 2);
 
 		dt {
-			position: relative;
-			height: @ui-header-height - @ui-margin;
-			line-height: @ui-header-height - @ui-margin;
-			padding: 0 @ui-margin;
-			background: @armazon-color-primary;
-			color: @armazon-color-background;
+			cursor: pointer;
+			border-bottom: solid fade(#fff, 10%) 1px;
+			white-space: nowrap;
 			overflow: hidden;
-			border-radius: 4px;
+			text-overflow: ellipsis;
+			position: relative;
+			padding: 0 40px 0 5px;
+			height: 40px;
+			line-height: 40px;
 
 			&:after {
-				content: '\25bc';
+				content: '\f054'; // chevron-right (default)
+				font-family: 'FontAwesome';
+				font-size: 1.2rem;
+				display: block;
 				position: absolute;
 				top: 0;
 				right: 0;
-				display: block;
-				height: @ui-header-height - @ui-margin;
-				width: @ui-header-height - @ui-margin;
-				border-left: dotted fade(#000, 50%) 1px;
+				width: 40px;
+				height: 40px;
+				line-height: 40px;
 				text-align: center;
-				font-size: 10px;
 			}
+
+			&:hover {
+				color: #fff;
+				border-bottom: solid fade(#fff, 50%) 1px;
+			}
+
 		}
+
 		dd {
-			display: none;
-			position: absolute;
-			width: @ui-sidebar-width - (@ui-margin*2);
-			background: fade(#fff, 90%);
-			color: @armazon-color-background;
-			border-radius: 4px;
-			margin: 5px 0 0 0;
+			height: 0px;
+			overflow: hidden;
+			padding: 0;
+		}
 
-			ul {
-				padding: @ui-margin 0;
-
-				li {
-					label {
-						cursor: pointer;
-						padding: 5px @ui-margin;
-						font-weight: bold;
-					}
-				}
+		&.aside-dl-open {
+			dt:after {
+				content: '\f078'; // chevron-down
+			}
+			dd {
+				height: auto;
+				padding: 10px 0 5px 0;
+			}
+		}
+		&.aside-dl-close {
+			dt:after {
+				content: '\f054'; // chevron-right
+			}
+			dd {
+				// display: none;
 			}
 		}
 
-		&:hover {
-			dd { display: block; }
-		}
 	}
 }
 
 
 
-#ad {
-	display: none;
-	margin-top: @ui-margin;
-	width: 300px;
-	height: 250px;
-	background: rgba(0, 0, 0, .2);
-}
+
 #helper {
 	display: inline-block;
 	width: auto;

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Voces&subset=latin,latin-ext" />
 	<link rel="stylesheet" type="text/css" href="frontend/styles/app.css" />
 </head>
-<body>
+<body v-bind:class="{'no-sidebar' : hide_sidebar}">
 
 <div id="main">
 	<header>
@@ -21,7 +21,7 @@
 			<i class="fa fa-fw fa-keyboard-o"></i>
 			<strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols.
 		</h1>
-		<p class="hamburguer-icon"><a href="#sidebar" title="Sidebar Display Switcher" onclick="alert('nothing yet...'); return false;"><span>&#x2261;</span></a></p>
+		<p class="hamburguer-icon"><a href="#sidebar" title="Sidebar Display Switcher" v-on:click.prevent="toogle_sidebar()"><span>&#x2261;</span></a></p>
 	</header>
 
 	<section>
@@ -58,42 +58,55 @@
 		</p>
 		<ul>
 			<li><a href="#" title="Share on Twitter" onclick="alert('nothing yet...'); return false;"><i class="fa fa-twitter"></i> <span>Share on Twitter</span></a></li>
-			<li><a href="#" title="Share on FaceBook" onclick="alert('nothing yet...'); return false;"><i class="fa fa-facebook"></i> <span>Share on FaceBook</span></a></li>
+			<li><a href="#" title="Share on FaceBook" onclick="alert('nothing yet...'); return false;"><i class="fa fa-facebook-official"></i> <span>Share on FaceBook</span></a></li>
 			<li><a href="#" title="Share on Google+" onclick="alert('nothing yet...'); return false;"><i class="fa fa-google-plus"></i> <span>Share on GooglePlus</span></a></li>
-			<li><a href="#" title="Share on LinkedIn" onclick="alert('nothing yet...'); return false;"><i class="fa fa-linkedin"></i> <span>Share on LinkedIn</span></a></li>
+			<li><a href="#" title="Share on LinkedIn" onclick="alert('nothing yet...'); return false;"><i class="fa fa-linkedin-square"></i> <span>Share on LinkedIn</span></a></li>
 		</ul>
 	</footer>
 </div>
 
 <div id="sidebar">
 	<aside>
-		<dl>
-			<dt><dfn>Type : <strong>{{ current_keymap }}</strong></dfn></dt>
+		<h3 v-on:click.prevent="toogle_sidebar()">Options Menu</h3>
+
+		<dl v-bind:class="aside_menu_type_open ? 'aside-dl-open' : aside-dl-close">
+			<dt @click="toggle_menu_type()"><dfn>Keyboard Type : <strong>{{ current_keymap }}</strong></dfn></dt>
 			<dd>
 				<ul>
 					<li v-for="map in maps">
-						<label>
-							<input
-								type="radio"
-								name="current-map"
-								@click="setMap($key)"
-								v-model="current_keymap"
-								v-bind:id="'current-map-'+$key"
-								v-bind:value="$key" />
-							{{ $key }}
-						</label>
+						<label><input type="radio" name="current-map"
+									@click="setMap($key)"
+									v-model="current_keymap"
+									v-bind:id="'current-map-'+$key"
+									v-bind:value="$key" />{{ $key }}</label>
 					</li>
 				</ul>
 			</dd>
 		</dl>
 
-		<ul id="characters-mapped">
-			<li v-for="k in keymap">
-				<button @click="addChar($key)" class="char-trigger">{{ $key }}</button>
-				<template v-for="i in k"><button @click="addChar(i)" class="char-item">{{ i }}</button></template>
-			</li>
-		</ul>
-		<div id="ad">[[ ad here ]]</div>
+		<dl v-bind:class="aside_menu_keys_open ? 'aside-dl-open' : aside-dl-close">
+			<dt @click="toggle_menu_keys()"><dfn>Current Key Bindings ( <strong>{{ current_keymap }}</strong> )</dfn></dt>
+			<dd>
+				<ul id="characters-mapped">
+					<li v-for="k in keymap">
+						<button @click="addChar($key)" class="char-trigger">{{ $key }}</button>
+						<template v-for="i in k"><button @click="addChar(i)" class="char-item">{{ i }}</button></template>
+					</li>
+				</ul>
+			</dd>
+		</dl>
+
+		<dl v-bind:class="aside_menu_lang_open ? 'aside-dl-open' : aside-dl-close">
+			<dt @click="toggle_menu_lang()"><dfn>UI Interface Language ( English )</dfn></dt>
+			<dd>
+				<ul>
+					<li>
+						<label><input type="radio" name="name" value="false">Spanish</label>
+						<label><input type="radio" name="name" value="true">English</label>
+					</li>
+				</ul>
+			</dd>
+		</dl>
 	</aside>
 </div>
 
