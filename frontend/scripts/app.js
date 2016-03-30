@@ -6,6 +6,15 @@ function get_key(e) {
 			: ( (e.which) ? e.which : keynum );
 	return String.fromCharCode(keynum);
 }
+function get_style(el,style_prop) {
+	var o = null;
+	if (el.currentStyle) {
+		o = el.currentStyle[style_prop];
+	} else if (window.getComputedStyle) {
+		o = document.defaultView.getComputedStyle(el,null).getPropertyValue(style_prop);
+	}
+	return o;
+}
 
 var maps = {
 	'greek' : {
@@ -115,14 +124,20 @@ var data = {
 	current_keymap : 'IPA-full',
 	input : '',
 
+	place_holder : 'IPA Keyboard. Write here...',
+
 	keymap : null,
-	output : '',
+//	output : '',
 
 	helper_chars : [],
 	helper_chars_current : -1,
 	helper_chars_origin : null,
 
 	helper_coordinates : {
+		top : 0,
+		left : 0
+	},
+	helper_offset : {
 		top : 0,
 		left : 0
 	},
@@ -136,6 +151,10 @@ var data = {
 
 var started = 0;
 
+var lang = {
+	_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.'
+}
+
 var app = new Vue({
 
 	config : {
@@ -148,10 +167,31 @@ var app = new Vue({
 	created : function() {
 
 		this.init();
+		this.calc_helper_offset();
+		document.querySelector('#data-input').focus();
+		//document.querySelector('#data-input').setAttribute('placeholder', lang._placeholder);
 
 	},
 	filters : {},
 	methods : {
+
+		create_placeholder : function() {
+
+		},
+
+		calc_helper_offset : function() {
+			var elem = document.querySelector('#data-input');
+			var y = elem.offsetTop;
+				// y += parseInt(get_style(elem, 'padding-top'));
+				y += parseInt(get_style(elem, 'font-size')) * 1.5;
+				this.helper_offset.top = y;
+
+			var x = elem.offsetLeft;
+				// x += parseInt(get_style(elem, 'padding-left'));
+				this.helper_offset.left = x + 10; // arbitrary 10
+
+			this.helper_positioning(0, 0);
+		},
 
 		toogle_sidebar : function() {
 			this.hide_sidebar = !this.hide_sidebar;
@@ -167,14 +207,17 @@ var app = new Vue({
 			this.aside_menu_lang_open = !this.aside_menu_lang_open;
 		},
 
+		helper_positioning(x,y) {
+			this.helper_coordinates.top = x + this.helper_offset.top;
+			this.helper_coordinates.left = y + this.helper_offset.left;
+		},
+
 		onKeyDown : function() {},
 		onKeyPress : function() {
 
 			var elem = document.querySelector('#data-input');
-			this.helper_coordinates = getCaretCoordinates(elem, elem.selectionEnd);
-			this.helper_coordinates.top += 90;
-			this.helper_coordinates.left += 30;
-			console.log('top: ', this.helper_coordinates.top, ' - left: ', this.helper_coordinates.left);
+			var caret = getCaretCoordinates(elem, elem.selectionEnd);
+			this.helper_positioning( caret.top, caret.left );
 
 		},
 		onKeyUp : function() {},

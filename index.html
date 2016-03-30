@@ -30,9 +30,7 @@
 			@keyup="onKeyUp"
 			@keypress="onKeyPress"
 			@keydown="onKeyDown"
-			placeholder="write here..."
-		></textarea>
-		<p>{{ output }}</p>
+			placeholder="{{place_holder}}"></textarea>
 
 		<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
 			<dl>
