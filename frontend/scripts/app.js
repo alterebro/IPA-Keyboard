@@ -16,6 +16,7 @@ function get_style(el,style_prop) {
 	return o;
 }
 
+
 var maps = {
 	'greek' : {
 		'a' : ['α','ά'],
@@ -144,7 +145,7 @@ var lang = {
 		_ui_lang : 'Idioma del interface UI',
 		_footer_created : 'Diseño y desarrollo por',
 
-		_placeholder : 'PLACEHOLDER ESPAÑOLO'
+		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional'
 	}
 }
 
@@ -161,8 +162,6 @@ var data = {
 	current_keymap : 'IPA-full',
 	current_lang : 'en',
 	input : '',
-
-	place_holder : 'IPA Keyboard. Write here...',
 
 	keymap : null,
 	lang : null,
@@ -204,14 +203,25 @@ var app = new Vue({
 
 		this.init();
 		this.calc_helper_offset();
-		document.querySelector('#data-input').focus();
-		//document.querySelector('#data-input').setAttribute('placeholder', lang._placeholder);
+		this.create_placeholder();
 
 	},
 	filters : {},
 	methods : {
 
 		create_placeholder : function() {
+
+			var p = this.lang._placeholder;
+			var p_str = '';
+			var counter = 0;
+			var interval = window.setInterval(function() {
+				p_str += p[counter];
+				counter++;
+				if ( counter >= (p.length) ) { clearInterval(interval); }
+				document.querySelector('#data-input').setAttribute('placeholder', p_str);
+			}, 10);
+
+			document.querySelector('#data-input').focus();
 
 		},
 
@@ -264,6 +274,7 @@ var app = new Vue({
 		},
 		setLang(param) {
 			data.lang = lang[param];
+			this.create_placeholder();
 		},
 		addChar : function(c) {
 			var s = document.querySelector('#data-input').selectionStart;
