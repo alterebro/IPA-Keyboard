@@ -17,6 +17,7 @@ function get_style(el,style_prop) {
 }
 
 
+
 var maps = {
 	'greek' : {
 		'a' : ['α','ά'],
@@ -206,7 +207,21 @@ var app = new Vue({
 		this.create_placeholder();
 
 	},
-	filters : {},
+	filters : {
+
+		beautify : function(str) {
+			str = str.replace('-', ' ');
+
+			var w = str.split(' ');
+			var _w = [];
+			for ( var i=0; i<w.length; i++ ) {
+				_w.push( w[i][0].toUpperCase() + w[i].substr(1) );
+			}
+			_w = _w.join(' ');
+			return _w;
+		}
+
+	},
 	methods : {
 
 		create_placeholder : function() {

@@ -50,6 +50,7 @@
 
 	<footer>
 		<p>
+			<i class="fa fa-fw fa-code"></i>
 			<span v-html="lang._footer_created">Design &amp; development by</span> <strong>Jorge Moreno</strong>
 			aka <a href="http://moro.es" target="_blank" title="Jorge Moreno aka Moro. Front End Web Developer and UI Designer. Zaragoza, Spain">moro</a>.
 			( <a href="https://twitter.com/alterebro" target="_blank" title="@alterebro. Web Development and Design">@alterebro</a> )
@@ -68,7 +69,7 @@
 		<h3 v-on:click.prevent="toogle_sidebar()" v-text="lang._options_menu">Options Menu</h3>
 
 		<dl v-bind:class="aside_menu_type_open ? 'aside-dl-open' : aside-dl-close">
-			<dt @click="toggle_menu_type()"><dfn><span v-text="lang._keyboard_type">Keyboard Type</span> : <strong>{{ current_keymap }}</strong></dfn></dt>
+			<dt @click="toggle_menu_type()"><dfn><span v-text="lang._keyboard_type">Keyboard Type</span> : <strong>{{ current_keymap | beautify }}</strong></dfn></dt>
 			<dd>
 				<ul class="option-list">
 					<li v-for="map in maps">
@@ -76,14 +77,14 @@
 									@click="setMap($key)"
 									v-model="current_keymap"
 									v-bind:id="'current-map-'+$key"
-									v-bind:value="$key" />{{ $key }}</label>
+									v-bind:value="$key" />{{ $key | beautify }}</label>
 					</li>
 				</ul>
 			</dd>
 		</dl>
 
 		<dl v-bind:class="aside_menu_keys_open ? 'aside-dl-open' : aside-dl-close">
-			<dt @click="toggle_menu_keys()"><dfn><span v-text="lang._current_keys">Current Key Bindings</span> ( <strong>{{ current_keymap }}</strong> )</dfn></dt>
+			<dt @click="toggle_menu_keys()"><dfn><span v-text="lang._current_keys">Current Key Bindings</span> ( <strong>{{ current_keymap | beautify }}</strong> )</dfn></dt>
 			<dd>
 				<ul id="characters-mapped">
 					<li v-for="k in keymap">
