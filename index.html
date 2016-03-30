@@ -70,7 +70,7 @@
 		<dl v-bind:class="aside_menu_type_open ? 'aside-dl-open' : aside-dl-close">
 			<dt @click="toggle_menu_type()"><dfn><span v-text="lang._keyboard_type">Keyboard Type</span> : <strong>{{ current_keymap }}</strong></dfn></dt>
 			<dd>
-				<ul>
+				<ul class="option-list">
 					<li v-for="map in maps">
 						<label><input type="radio" name="current-map"
 									@click="setMap($key)"
@@ -97,7 +97,7 @@
 		<dl v-bind:class="aside_menu_lang_open ? 'aside-dl-open' : aside-dl-close">
 			<dt @click="toggle_menu_lang()"><dfn><span v-text="lang._ui_lang">UI Interface Language</span> ( {{ langs[current_lang] }} )</dfn></dt>
 			<dd>
-				<ul>
+				<ul class="option-list">
 					<li v-for="l in langs">
 						<label><input
 							type="radio" name="current-lang"
