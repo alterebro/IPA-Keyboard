@@ -19,7 +19,7 @@
 	<header>
 		<h1>
 			<i class="fa fa-fw fa-keyboard-o"></i>
-			<strong>IPA Keyboard</strong>. International Phonetic Alphabet Symbols.
+			<strong v-text="lang._title">IPA Keyboard</strong>. <span v-text="lang._tagline">International Phonetic Alphabet Symbols.</span>
 		</h1>
 		<p class="hamburguer-icon"><a href="#sidebar" title="Sidebar Display Switcher" v-on:click.prevent="toogle_sidebar()"><span>&#x2261;</span></a></p>
 	</header>
@@ -34,7 +34,7 @@
 
 		<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
 			<dl>
-				<dt>Press tab &#8677; to cycle through</dt>
+				<dt v-html="lang._helper_desc">Press tab &#8677; to cycle through</dt>
 				<dd>
 					<template v-for="c in helper_chars">
 						<button
@@ -50,7 +50,7 @@
 
 	<footer>
 		<p>
-			Design &amp; development by <strong>Jorge Moreno</strong>
+			<span v-html="lang._footer_created">Design &amp; development by</span> <strong>Jorge Moreno</strong>
 			aka <a href="http://moro.es" target="_blank" title="Jorge Moreno aka Moro. Front End Web Developer and UI Designer. Zaragoza, Spain">moro</a>.
 			( <a href="https://twitter.com/alterebro" target="_blank" title="@alterebro. Web Development and Design">@alterebro</a> )
 		</p>
@@ -65,10 +65,10 @@
 
 <div id="sidebar">
 	<aside>
-		<h3 v-on:click.prevent="toogle_sidebar()">Options Menu</h3>
+		<h3 v-on:click.prevent="toogle_sidebar()" v-text="lang._options_menu">Options Menu</h3>
 
 		<dl v-bind:class="aside_menu_type_open ? 'aside-dl-open' : aside-dl-close">
-			<dt @click="toggle_menu_type()"><dfn>Keyboard Type : <strong>{{ current_keymap }}</strong></dfn></dt>
+			<dt @click="toggle_menu_type()"><dfn><span v-text="lang._keyboard_type">Keyboard Type</span> : <strong>{{ current_keymap }}</strong></dfn></dt>
 			<dd>
 				<ul>
 					<li v-for="map in maps">
@@ -83,7 +83,7 @@
 		</dl>
 
 		<dl v-bind:class="aside_menu_keys_open ? 'aside-dl-open' : aside-dl-close">
-			<dt @click="toggle_menu_keys()"><dfn>Current Key Bindings ( <strong>{{ current_keymap }}</strong> )</dfn></dt>
+			<dt @click="toggle_menu_keys()"><dfn><span v-text="lang._current_keys">Current Key Bindings</span> ( <strong>{{ current_keymap }}</strong> )</dfn></dt>
 			<dd>
 				<ul id="characters-mapped">
 					<li v-for="k in keymap">
@@ -95,12 +95,15 @@
 		</dl>
 
 		<dl v-bind:class="aside_menu_lang_open ? 'aside-dl-open' : aside-dl-close">
-			<dt @click="toggle_menu_lang()"><dfn>UI Interface Language ( English )</dfn></dt>
+			<dt @click="toggle_menu_lang()"><dfn><span v-text="lang._ui_lang">UI Interface Language</span> ( {{ langs[current_lang] }} )</dfn></dt>
 			<dd>
 				<ul>
-					<li>
-						<label><input type="radio" name="name" value="false">Spanish</label>
-						<label><input type="radio" name="name" value="true">English</label>
+					<li v-for="l in langs">
+						<label><input
+							type="radio" name="current-lang"
+							@click="setLang($key)"
+							v-model="current_lang"
+							value="{{ $key }}">{{ l }}</label>
 					</li>
 				</ul>
 			</dd>

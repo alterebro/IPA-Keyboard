@@ -119,15 +119,55 @@ var maps = {
 	}
 }
 
+var lang = {
+	en : {
+		label : 'English',
+		_title : 'IPA Keyboard',
+		_tagline : 'International Phonetic Alphabet Symbols.',
+		_helper_desc : 'Press tab &#8677; to cycle through',
+		_options_menu : 'Options Menu',
+		_keyboard_type : 'Keyboard Type',
+		_current_keys : 'Current Key Bindings',
+		_ui_lang : 'UI Interface Language',
+		_footer_created : 'Design &amp; development by',
+
+		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.'
+	},
+	es : {
+		label : 'Español',
+		_title : 'Teclado AFI',
+		_tagline : 'Alfabeto Fonético Internacional.',
+		_helper_desc : 'Usa el Tabuador &#8677; para desplazarte',
+		_options_menu : 'Menu de Opciones',
+		_keyboard_type : 'Tipo de Teclado',
+		_current_keys : 'Carácteres asociados',
+		_ui_lang : 'Idioma del interface UI',
+		_footer_created : 'Diseño y desarrollo por',
+
+		_placeholder : 'PLACEHOLDER ESPAÑOLO'
+	}
+}
+
+var _langs = function() {
+	var langs = {};
+	for ( var i in lang ) {
+		langs[i] = lang[i]['label'];
+	}
+	return langs;
+}
+
 var data = {
 	maps : maps,
 	current_keymap : 'IPA-full',
+	current_lang : 'en',
 	input : '',
 
 	place_holder : 'IPA Keyboard. Write here...',
 
 	keymap : null,
-//	output : '',
+	lang : null,
+
+	langs : _langs(),
 
 	helper_chars : [],
 	helper_chars_current : -1,
@@ -143,17 +183,13 @@ var data = {
 	},
 
 	aside_menu_type_open : false,
-	aside_menu_keys_open : true,
-	aside_menu_lang_open : false,
+	aside_menu_keys_open : false,
+	aside_menu_lang_open : true,
 
 	hide_sidebar : false
 };
 
 var started = 0;
-
-var lang = {
-	_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.'
-}
 
 var app = new Vue({
 
@@ -226,6 +262,9 @@ var app = new Vue({
 			data.current_keymap = param;
 			this.init();
 		},
+		setLang(param) {
+			data.lang = lang[param];
+		},
 		addChar : function(c) {
 			var s = document.querySelector('#data-input').selectionStart;
 
@@ -268,6 +307,8 @@ var app = new Vue({
 		init : function() {
 
 			data['keymap'] = data.maps[data.current_keymap];
+			data['lang'] = lang[data.current_lang];
+
 
 			var self = this;
 			var input_element = document.querySelector('#data-input');
