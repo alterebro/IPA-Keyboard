@@ -180,7 +180,7 @@ var lang = {
 		_ui_lang : 'UI Interface Language',
 		_footer_created : 'Design &amp; development by',
 
-		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.'
+		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro'
 	},
 	es : {
 		label : 'Español',
@@ -193,7 +193,7 @@ var lang = {
 		_ui_lang : 'Idioma del interface UI',
 		_footer_created : 'Diseño y desarrollo por',
 
-		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional'
+		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro'
 	}
 }
 
@@ -231,9 +231,15 @@ var data = {
 
 	aside_menu_type_open : false,
 	aside_menu_keys_open : false,
-	aside_menu_lang_open : true,
+	aside_menu_lang_open : false,
 
-	hide_sidebar : false
+	hide_sidebar : false,
+
+	metadata : {
+		title : 'IPA Keyboard',
+		description : 'IPA Keyboard. International Phonetic Alphabet Symbols',
+		url : 'http://alterebro.github.io/IPA-Keyboard/'
+	}
 };
 
 var started = 0;
@@ -254,13 +260,17 @@ var app = new Vue({
 		this.init();
 		this.calc_helper_offset();
 		this.create_placeholder();
+		this.socialLinks();
 
 	},
 	filters : {
 
 		beautify : function(str) {
 			return str.replace(/-/g, ' ');
-		}
+		},
+		urlencode : function(str) {
+            return encodeURIComponent(str);
+        }
 
 	},
 	methods : {
@@ -275,7 +285,7 @@ var app = new Vue({
 				counter++;
 				if ( counter >= (p.length) ) { clearInterval(interval); }
 				document.querySelector('#data-input').setAttribute('placeholder', p_str);
-			}, 10);
+			}, 5);
 
 			document.querySelector('#data-input').focus();
 
@@ -371,11 +381,21 @@ var app = new Vue({
 			this.helper_chars_current = -1;
 		},
 
+		socialLinks : function() {
+            var social_links = document.querySelectorAll('#main footer ul li a');
+            for (var i=0; i<social_links.length; i++) {
+                social_links[i].onclick = function(e) {
+                    e.preventDefault();
+                    var network_window = window.open( this.href, this.getAttribute('data-network'), 'height=350,width=600');
+                	network_window.focus();
+                }
+            }
+        },
+
 		init : function() {
 
 			data['keymap'] = data.maps[data.current_keymap];
 			data['lang'] = lang[data.current_lang];
-
 
 			var self = this;
 			var input_element = document.querySelector('#data-input');

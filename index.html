@@ -2,13 +2,35 @@
 <html id="app">
 <head>
 	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>IPA Keyboard</title>
-	<meta name="description" content="International Phonetic Alphabet Keyboard" />
-	<meta name="author" content="Jorge Moreno. @alterebro" />
+	<meta name="description" content="IPA Keyboard. International Phonetic Alphabet Symbols." />
+	<meta name="author" content="Jorge Moreno aka moro, moro.es (@alterebro)" />
 	<meta name="HandheldFriendly" content="True" />
 	<meta name="MobileOptimized" content="320" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
+	<!--[if IEMobile]><meta http-equiv="cleartype" content="on" /><![endif]-->
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<meta name="twitter:title" property="og:title" itemprop="title name" content="IPA Keyboard" v-bind:content="metadata.title" />
+	<meta name="twitter:description" property="og:description" itemprop="description" content="IPA Keyboard. International Phonetic Alphabet Symbols" v-bind:content="metadata.description" />
+	<meta name="twitter:url" property="og:url" itemprop="url" content="http://alterebro.github.io/IPA-Keyboard/" v-bind:content="metadata.url" />
+	<meta name="twitter:image" property="og:image" itemprop="image" content="http://alterebro.github.io/IPA-Keyboard/frontend/images/ipa-keyboard.jpg" />
+	<meta property="og:type" content="website" />
+	<meta property="fb:admins" content="636040175" />
+	<meta property="article:author" content="https://www.facebook.com/alterebro" />
+	<meta property="article:publisher" content="https://www.facebook.com/alterebro" />
+	<link href="https://plus.google.com/104877504101033707627/posts" rel="author" />
+	<link href="https://plus.google.com/104877504101033707627" rel="publisher" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="@alterebro" />
+	<meta name="twitter:creator" content="@alterebro" />
+
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="address=no" />
+	<meta name="google" content="notranslate" />
+	<meta name="robots" content="index, follow" />
+
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Voces&subset=latin,latin-ext" />
 	<link rel="stylesheet" type="text/css" href="frontend/styles/app.css" />
@@ -56,10 +78,10 @@
 			( <a href="https://twitter.com/alterebro" target="_blank" title="@alterebro. Web Development and Design">@alterebro</a> )
 		</p>
 		<ul>
-			<li><a href="#" title="Share on Twitter" onclick="alert('nothing yet...'); return false;"><i class="fa fa-twitter"></i> <span>Share on Twitter</span></a></li>
-			<li><a href="#" title="Share on FaceBook" onclick="alert('nothing yet...'); return false;"><i class="fa fa-facebook-official"></i> <span>Share on FaceBook</span></a></li>
-			<li><a href="#" title="Share on Google+" onclick="alert('nothing yet...'); return false;"><i class="fa fa-google-plus"></i> <span>Share on GooglePlus</span></a></li>
-			<li><a href="#" title="Share on LinkedIn" onclick="alert('nothing yet...'); return false;"><i class="fa fa-linkedin-square"></i> <span>Share on LinkedIn</span></a></li>
+			<li><a href="http://twitter.com/share?text={{ metadata.title | urlencode }}&url={{ metadata.url | urlencode }}&via=alterebro" title="Share on Twitter" data-network="twitter"><i class="fa fa-twitter"></i> <span>Share on Twitter</span></a></li>
+			<li><a href="http://www.facebook.com/sharer.php?u={{ metadata.url | urlencode }}&t={{ metadata.title | urlencode }}" title="Share on FaceBook" data-network="facebook"><i class="fa fa-facebook-official"></i> <span>Share on FaceBook</span></a></li>
+			<li><a href="https://plusone.google.com/_/+1/confirm?hl=en&url={{ metadata.url | urlencode }}" title="Share on Google+" data-network="googleplus"><i class="fa fa-google-plus"></i> <span>Share on GooglePlus</span></a></li>
+			<li><a href="http://www.linkedin.com/shareArticle?mini=true&url={{ metadata.url | urlencode }}&title={{ metadata.title | urlencode }}&summary={{ metadata.description | urlencode }}" title="Share on LinkedIn" data-network="linkedin"><i class="fa fa-linkedin-square"></i> <span>Share on LinkedIn</span></a></li>
 		</ul>
 	</footer>
 </div>
