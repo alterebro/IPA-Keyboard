@@ -17,7 +17,6 @@ function get_style(el,style_prop) {
 }
 
 
-
 var maps = {
 	'IPA-Full' : {
 		'a' : ['ɑ','æ','ɐ','ɑ̃'],
@@ -179,7 +178,6 @@ var lang = {
 		_current_keys : 'Current Key Bindings',
 		_ui_lang : 'UI Interface Language',
 		_footer_created : 'Design &amp; development by',
-
 		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro'
 	},
 	es : {
@@ -192,34 +190,38 @@ var lang = {
 		_current_keys : 'Carácteres asociados',
 		_ui_lang : 'Idioma del interface UI',
 		_footer_created : 'Diseño y desarrollo por',
-
 		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro'
 	}
 }
 
-var _langs = function() {
-	var langs = {};
-	for ( var i in lang ) {
-		langs[i] = lang[i]['label'];
-	}
-	return langs;
-}
+var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
+	input_data : '',
+	default_lang : 'en',
+	menu_type_open : false,
+	menu_keys_open : false,
+	menu_lang_open : false,
+	sidebar_hidden : false
+};
 
 var data = {
 	maps : maps,
 	current_keymap : 'IPA-Full',
-	current_lang : 'en',
-	input : '',
+	current_lang : app_state.default_lang,
+	input : app_state.input_data,
 
 	keymap : null,
 	lang : null,
-
-	langs : _langs(),
+	langs : (function() {
+		var langs = {};
+		for ( var i in lang ) {
+			langs[i] = lang[i]['label'];
+		}
+		return langs;
+	})(),
 
 	helper_chars : [],
 	helper_chars_current : -1,
 	helper_chars_origin : null,
-
 	helper_coordinates : {
 		top : 0,
 		left : 0
@@ -229,11 +231,10 @@ var data = {
 		left : 0
 	},
 
-	aside_menu_type_open : false,
-	aside_menu_keys_open : false,
-	aside_menu_lang_open : false,
-
-	hide_sidebar : false,
+	aside_menu_type_open : app_state.menu_type_open,
+	aside_menu_keys_open : app_state.menu_keys_open,
+	aside_menu_lang_open : app_state.menu_lang_open,
+	hide_sidebar : app_state.sidebar_hidden,
 
 	metadata : {
 		title : 'IPA Keyboard',
@@ -243,15 +244,10 @@ var data = {
 };
 
 var started = 0;
-
-// Vue.config.debug = true;
+Vue.config.debug = true;
+Vue.config.devtools = true;
 
 var app = new Vue({
-
-	config : {
-		debug : true,
-		devtools : true
-	},
 
 	el : '#app',
 	data : data,
@@ -263,6 +259,7 @@ var app = new Vue({
 		this.socialLinks();
 
 	},
+
 	filters : {
 
 		beautify : function(str) {
@@ -271,8 +268,8 @@ var app = new Vue({
 		urlencode : function(str) {
             return encodeURIComponent(str);
         }
-
 	},
+
 	methods : {
 
 		create_placeholder : function() {
@@ -288,18 +285,15 @@ var app = new Vue({
 			}, 5);
 
 			document.querySelector('#data-input').focus();
-
 		},
 
 		calc_helper_offset : function() {
 			var elem = document.querySelector('#data-input');
 			var y = elem.offsetTop;
-				// y += parseInt(get_style(elem, 'padding-top'));
 				y += parseInt(get_style(elem, 'font-size')) * 1.5;
 				this.helper_offset.top = y;
 
 			var x = elem.offsetLeft;
-				// x += parseInt(get_style(elem, 'padding-left'));
 				this.helper_offset.left = x + 10; // arbitrary 10
 
 			this.helper_positioning(0, 0);
@@ -307,16 +301,19 @@ var app = new Vue({
 
 		toogle_sidebar : function() {
 			this.hide_sidebar = !this.hide_sidebar;
+			this.saveAppState();
 		},
-
 		toggle_menu_type : function() {
 			this.aside_menu_type_open = !this.aside_menu_type_open;
+			this.saveAppState();
 		},
 		toggle_menu_keys : function() {
 			this.aside_menu_keys_open = !this.aside_menu_keys_open;
+			this.saveAppState();
 		},
 		toggle_menu_lang : function() {
 			this.aside_menu_lang_open = !this.aside_menu_lang_open;
+			this.saveAppState();
 		},
 
 		helper_positioning(x,y) {
@@ -330,9 +327,23 @@ var app = new Vue({
 			var elem = document.querySelector('#data-input');
 			var caret = getCaretCoordinates(elem, elem.selectionEnd);
 			this.helper_positioning( caret.top, caret.left );
-
 		},
-		onKeyUp : function() {},
+		onKeyUp : function() {
+			this.saveAppState();
+		},
+
+		saveAppState : function() {
+			// Save App state
+			var app_settings = {
+				input_data : data.input,
+				default_lang : data.current_lang,
+				menu_type_open : data.aside_menu_type_open,
+				menu_keys_open : data.aside_menu_keys_open,
+				menu_lang_open : data.aside_menu_lang_open,
+				sidebar_hidden : data.hide_sidebar
+			}
+			localStorage.setItem('IPA-Keyboard-settings', JSON.stringify(app_settings));
+		},
 
 		setMap : function(param) {
 			data.current_keymap = param;
