@@ -143,6 +143,27 @@
 				</ul>
 			</dd>
 		</dl>
+
+		<dl v-bind:class="aside_menu_help_open ? 'aside-dl-open' : aside-dl-close">
+			<dt @click="toggle_menu_help()"><dfn v-text="lang._support_title">Support</dfn></dt>
+			<dd>
+				<div class="support-dd">
+					<p v-html="lang._support_desc">
+						The IPA Keyboard has been done by Spanish Web Developer <strong>Jorge Moreno</strong>
+						(<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>)
+						<br />
+						It is free, it doesn't have annoying ads of any kind and you can help to keep it this way
+						if you find it useful and get any value from it by suporting the app creator making a small donation!
+					</p>
+					<p>
+						<a href="https://paypal.me/alterebro" target="_blank" class="paypal-donation">
+							<i class="fa fa-fw fa-paypal"></i>
+							<span v-text="lang._support_donate">Donate via Paypal</span>
+						</a>
+					</p>
+				</div>
+			</dd>
+		</dl>
 	</aside>
 </div>
 

@@ -178,7 +178,10 @@ var lang = {
 		_current_keys : 'Current Key Bindings',
 		_ui_lang : 'UI Interface Language',
 		_footer_created : 'Design &amp; development by',
-		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro'
+		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro',
+		_support_title : 'Support',
+		_support_desc : 'The IPA Keyboard has been done by Spanish Web Developer <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). It is free, it doesn\'t have annoying ads of any kind and you can help to keep it this way if you find it useful and get any value from it by suporting the app creator making a small donation!',
+		_support_donate : 'Donate via Paypal'
 	},
 	es : {
 		label : 'Español',
@@ -188,11 +191,15 @@ var lang = {
 		_options_menu : 'Menu de Opciones',
 		_keyboard_type : 'Tipo de Teclado',
 		_current_keys : 'Carácteres asociados',
-		_ui_lang : 'Idioma del interface UI',
+		_ui_lang : 'Idioma de la Interface',
 		_footer_created : 'Diseño y desarrollo por',
-		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro'
+		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro',
+		_support_title : 'Colabora',
+		_support_desc : 'El teclado de simbolos AFI es una creación de <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). Esta app es gratis, no tiene anuncios molestos de ningún tipo y puedes contribuir a que siga de este modo si lo encuentras util y obtienes algún valor de el apoyando al creador de la app haciendole una pequeña donación!',
+		_support_donate : 'Donar via Paypal'
 	}
 }
+
 
 var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	input_data : '',
@@ -200,6 +207,7 @@ var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	menu_type_open : false,
 	menu_keys_open : false,
 	menu_lang_open : false,
+	menu_help_open : false,
 	sidebar_hidden : false
 };
 
@@ -234,6 +242,7 @@ var data = {
 	aside_menu_type_open : app_state.menu_type_open,
 	aside_menu_keys_open : app_state.menu_keys_open,
 	aside_menu_lang_open : app_state.menu_lang_open,
+	aside_menu_help_open : app_state.menu_help_open,
 	hide_sidebar : app_state.sidebar_hidden,
 
 	metadata : {
@@ -315,6 +324,10 @@ var app = new Vue({
 			this.aside_menu_lang_open = !this.aside_menu_lang_open;
 			this.saveAppState();
 		},
+		toggle_menu_help : function() {
+			this.aside_menu_help_open = !this.aside_menu_help_open;
+			this.saveAppState();
+		},
 
 		helper_positioning(x,y) {
 			this.helper_coordinates.top = x + this.helper_offset.top;
@@ -340,6 +353,7 @@ var app = new Vue({
 				menu_type_open : data.aside_menu_type_open,
 				menu_keys_open : data.aside_menu_keys_open,
 				menu_lang_open : data.aside_menu_lang_open,
+				menu_help_open : data.aside_menu_help_open,
 				sidebar_hidden : data.hide_sidebar
 			}
 			localStorage.setItem('IPA-Keyboard-settings', JSON.stringify(app_settings));
@@ -350,7 +364,9 @@ var app = new Vue({
 			this.init();
 		},
 		setLang(param) {
-			data.lang = lang[param];
+			console.log(param);
+			this.current_lang = param;
+			this.lang = lang[param];
 			this.create_placeholder();
 		},
 		addChar : function(c) {

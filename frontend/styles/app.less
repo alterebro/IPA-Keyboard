@@ -735,3 +735,32 @@ input {
 #sidebar, body {
 	.transition();
 }
+
+.support-dd {
+	padding: 15px;
+	font-size: 90%;
+	line-height: 1.6;
+
+	strong {
+		color: #fff;
+	}
+
+	a.paypal-donation {
+		display: block;
+		margin: 20px 0 0 0;
+
+		text-align: center;
+		background: @armazon-color-primary;
+		color: @armazon-color-background;
+		padding: 10px 5px;
+		border-radius: 3px;
+		border: none;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+		text-shadow: 0 1px 0 fade(#fff, 40%);
+
+		&:hover {
+			background: #fff;
+			color: #000;
+		}
+	}
+}
