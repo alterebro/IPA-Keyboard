@@ -521,34 +521,24 @@ body.no-sidebar {
 
 
 #helper {
-//	padding: @ui-header-height @ui-margin @ui-footer-height;
-
-//	border: solid #333 1px;
-
 	display: block;
 	width: auto;
 	position: absolute;
-//	top: 200px !important;
-//	left: 220px !important;
-
 	top: 0;
 	left: 0;
-
 	-ms-transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
+	padding: 9px 0 0 0;
 
-	padding: 9px 10px 10px 10px;
-
-
-	dl:before, dl:after {
+	&:before, &:after {
 		content: '';
 		display: block;
 		position: absolute;
 		left: 50%;
 		border-top: none;
 	}
-	dl:before {
+	&:before {
 		width: 18px;
 		height: 9px;
 		top: 1px;
@@ -557,7 +547,7 @@ body.no-sidebar {
 		border-bottom: solid #888 9px;
 		margin-left: -9px;
 	}
-	dl:after {
+	&:after {
 		width: 16px;
 		height: 8px;
 		top: 2px;
@@ -577,13 +567,14 @@ body.no-sidebar {
 			0 2px 0 0 rgba(0, 0, 0, .05),
 			0 2px 4px 1px rgba(0, 0, 0, .1)
 		;
+		position: relative;
+		left: 0;
 
 		dt, dd {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-
 		dt {
 			font-size: 70%;
 			color: @armazon-color-background;
@@ -601,7 +592,7 @@ body.no-sidebar {
 				margin: 1px;
 				border-radius: 2px;
 
-				background: fade(@armazon-color-neutral, 50%);
+				background: fade(@armazon-color-background, 50%);
 				color: #fff;
 
 				&.current, &:hover {

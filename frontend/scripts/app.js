@@ -343,6 +343,33 @@ var app = new Vue({
 		},
 		onKeyUp : function() {
 			this.saveAppState();
+
+			// --------------------------------------------------------
+			// calculate displacement of the helper window
+			if (this.helper_chars.length > 0) {
+				var the_input = document.querySelector('#data-input');
+				var the_helper = document.querySelector('#helper');
+				var the_inner_helper = document.querySelector('#helper dl');
+
+				var hhw = Math.round(parseInt( get_style(the_helper, 'width') ) / 2);
+				var hl = this.helper_coordinates.left;
+				var il = the_input.offsetLeft;
+
+				var displacement = false;
+				var displacement_value = 0;
+				var calc_l = (hhw+il)-hl;
+					if ( calc_l > 0 ) {
+						displacement = true;
+						displacement_value = (calc_l + 10);
+					}
+				var calc_r = the_input.offsetWidth - (hl+hhw-10);
+					if ( calc_r < 0 ) {
+						displacement = true;
+						displacement_value = calc_r;
+					}
+				the_inner_helper.style.left = (displacement) ? displacement_value + 'px' : '0px';
+			}
+
 		},
 
 		saveAppState : function() {
