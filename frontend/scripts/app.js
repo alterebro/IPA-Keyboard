@@ -1,3 +1,5 @@
+// ------------------------------------------------
+// ------------------------------------------------
 // Utils
 function get_key(e) {
 	var keynum;
@@ -16,7 +18,9 @@ function get_style(el,style_prop) {
 	return o;
 }
 
-
+// ------------------------------------------------
+// ------------------------------------------------
+var started = 0;
 var maps = {
 	'IPA-Full' : {
 		'a' : ['ɑ','æ','ɐ','ɑ̃'],
@@ -167,6 +171,8 @@ var maps = {
 	}
 }
 
+// ------------------------------------------------
+// ------------------------------------------------
 var lang = {
 	en : {
 		label : 'English',
@@ -200,6 +206,8 @@ var lang = {
 	}
 }
 
+// ------------------------------------------------
+// ------------------------------------------------
 var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	input_data : '',
 	default_keymap : 'IPA-Full',
@@ -211,6 +219,8 @@ var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	sidebar_hidden : false
 };
 
+// ------------------------------------------------
+// ------------------------------------------------
 var data = {
 	maps : maps,
 	current_keymap : app_state.default_keymap,
@@ -249,19 +259,17 @@ var data = {
 		title : 'IPA Keyboard',
 		description : 'IPA Keyboard. International Phonetic Alphabet Symbols',
 		url : 'http://alterebro.github.io/IPA-Keyboard/'
-	}
+	},
+	textarea : document.querySelector('#data-input'),
 };
 
-
-
-var started = 0;
-//Vue.config.debug = true;
-//Vue.config.devtools = true;
-
+// ------------------------------------------------
+// ------------------------------------------------
 var app = new Vue({
-
 	el : '#app',
 	data : data,
+
+	// ------------------------
 	created : function() {
 
 		this.init();
@@ -269,8 +277,10 @@ var app = new Vue({
 		this.create_placeholder();
 		this.socialLinks();
 		window.addEventListener('resize', this.closeHelper);
+
 	},
 
+	// ------------------------
 	filters : {
 		beautify : function(str) {
 			return str.replace(/-/g, ' ');
@@ -280,10 +290,10 @@ var app = new Vue({
         }
 	},
 
+	// ------------------------
 	methods : {
-
 		create_placeholder : function() {
-
+			var _in = this.textarea;
 			var p = this.lang._placeholder;
 			var p_str = '';
 			var counter = 0;
@@ -291,19 +301,18 @@ var app = new Vue({
 				p_str += p[counter];
 				counter++;
 				if ( counter >= (p.length) ) { clearInterval(interval); }
-				document.querySelector('#data-input').setAttribute('placeholder', p_str);
+				_in.setAttribute('placeholder', p_str);
 			}, 5);
 
-			document.querySelector('#data-input').focus();
+			_in.focus();
 		},
 
 		calc_helper_offset : function() {
-			var elem = document.querySelector('#data-input');
-			var y = elem.offsetTop;
-				y += parseInt(get_style(elem, 'font-size')) * 1.5;
+			var y = this.textarea.offsetTop;
+				y += parseInt(get_style(this.textarea, 'font-size')) * 1.5;
 				this.helper_offset.top = y;
 
-			var x = elem.offsetLeft;
+			var x = this.textarea.offsetLeft;
 				this.helper_offset.left = x + 10; // arbitrary 10
 
 			this.helper_positioning(0, 0);
@@ -314,18 +323,22 @@ var app = new Vue({
 			this.saveAppState();
 			this.closeHelper();
 		},
+
 		toggle_menu_type : function() {
 			this.aside_menu_type_open = !this.aside_menu_type_open;
 			this.saveAppState();
 		},
+
 		toggle_menu_keys : function() {
 			this.aside_menu_keys_open = !this.aside_menu_keys_open;
 			this.saveAppState();
 		},
+
 		toggle_menu_lang : function() {
 			this.aside_menu_lang_open = !this.aside_menu_lang_open;
 			this.saveAppState();
 		},
+
 		toggle_menu_help : function() {
 			this.aside_menu_help_open = !this.aside_menu_help_open;
 			this.saveAppState();
@@ -337,25 +350,23 @@ var app = new Vue({
 		},
 
 		onKeyDown : function() {},
-		onKeyPress : function() {
 
-			var elem = document.querySelector('#data-input');
-			var caret = getCaretCoordinates(elem, elem.selectionEnd);
+		onKeyPress : function() {
+			var caret = getCaretCoordinates(this.textarea, this.textarea.selectionEnd);
 			this.helper_positioning( caret.top, caret.left );
 		},
+
 		onKeyUp : function() {
 			this.saveAppState();
 
-			// --------------------------------------------------------
-			// calculate displacement of the helper window
+			// Calc helper modal displacement
 			if (this.helper_chars.length > 0) {
-				var the_input = document.querySelector('#data-input');
 				var the_helper = document.querySelector('#helper');
 				var the_inner_helper = document.querySelector('#helper dl');
 
 				var hhw = Math.round(parseInt( get_style(the_helper, 'width') ) / 2);
 				var hl = this.helper_coordinates.left;
-				var il = the_input.offsetLeft;
+				var il = this.textarea.offsetLeft;
 
 				var displacement = false;
 				var displacement_value = 0;
@@ -364,18 +375,16 @@ var app = new Vue({
 						displacement = true;
 						displacement_value = (calc_l + 10);
 					}
-				var calc_r = the_input.offsetWidth - (hl+hhw-10);
+				var calc_r = this.textarea.offsetWidth - (hl+hhw-10);
 					if ( calc_r < 0 ) {
 						displacement = true;
 						displacement_value = calc_r;
 					}
 				the_inner_helper.style.left = (displacement) ? displacement_value + 'px' : '0px';
 			}
-
 		},
 
 		saveAppState : function() {
-			// Save App state
 			var app_settings = {
 				input_data : data.input,
 				default_keymap : data.current_keymap,
@@ -393,36 +402,36 @@ var app = new Vue({
 			data.current_keymap = param;
 			this.init();
 		},
+
 		setLang(param) {
 			this.current_lang = param;
 			this.lang = lang[param];
 			this.create_placeholder();
 		},
-		addChar : function(c) {
-			var s = document.querySelector('#data-input').selectionStart;
 
+		addChar : function(c) {
+			var s = this.textarea.selectionStart;
 			this.input = data.input.substr(0,s) + c + data.input.substr(s);
+
 			this.setCaret(s+1);
-			document.querySelector('#data-input').focus();
 			this.closeHelper();
+			this.saveAppState();
+			this.textarea.focus();
 		},
 
 		setCaret : function(pos) {
-			// ...
+			var _in = this.textarea;
 			window.setTimeout(function(){
-				document.querySelector('#data-input').setSelectionRange(pos,pos);
+				_in.setSelectionRange(pos,pos);
 			}, 1);
 		},
 
 		cycleHelperChar : function() {
 			var cl = this.helper_chars.length;
 			if( cl > 0 ) {
-
 				this.helper_chars_current = ( this.helper_chars_current++ >= (cl) ) ? 0 : this.helper_chars_current++;
-
 				var c = (this.helper_chars_current == cl) ? this.helper_chars_origin : this.helper_chars[this.helper_chars_current];
-				var s = document.querySelector('#data-input').selectionStart;
-
+				var s = this.textarea.selectionStart;
 				this.input = data.input.substr(0,s-1) + c + data.input.substr(s);
 				this.setCaret(s);
 			}
@@ -432,6 +441,7 @@ var app = new Vue({
 			this.helper_chars_current = -1;
 			this.helper_chars = chars;
 		},
+
 		closeHelper : function() {
 			this.helper_chars = [];
 			this.helper_chars_current = -1;
@@ -449,12 +459,10 @@ var app = new Vue({
         },
 
 		init : function() {
-
 			data['keymap'] = data.maps[data.current_keymap];
 			data['lang'] = lang[data.current_lang];
-
 			var self = this;
-			var input_element = document.querySelector('#data-input');
+			var input_element = this.textarea;
 
 				Mousetrap.reset();
 				if (!started) { // ?
