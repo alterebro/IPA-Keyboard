@@ -203,6 +203,7 @@ var lang = {
 
 var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	input_data : '',
+	default_keymap : 'IPA-Full',
 	default_lang : 'en',
 	menu_type_open : false,
 	menu_keys_open : false,
@@ -213,7 +214,7 @@ var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 
 var data = {
 	maps : maps,
-	current_keymap : 'IPA-Full',
+	current_keymap : app_state.default_keymap,
 	current_lang : app_state.default_lang,
 	input : app_state.input_data,
 
@@ -253,8 +254,8 @@ var data = {
 };
 
 var started = 0;
-Vue.config.debug = true;
-Vue.config.devtools = true;
+//Vue.config.debug = true;
+//Vue.config.devtools = true;
 
 var app = new Vue({
 
@@ -376,6 +377,7 @@ var app = new Vue({
 			// Save App state
 			var app_settings = {
 				input_data : data.input,
+				default_keymap : data.current_keymap,
 				default_lang : data.current_lang,
 				menu_type_open : data.aside_menu_type_open,
 				menu_keys_open : data.aside_menu_keys_open,
