@@ -34,12 +34,6 @@
 @armazon-color-primary 			: #cdc83c; 	// Links and Buttons Color
 @armazon-color-neutral 			: #a0a0a0; 	// Neutral Grey
 
-/*
-	#135058, #F1F2B5
-	#304352, #d7d2cc;
-*/
-
-
 // --------------------------------------------
 // Media Queries
 @mobile 	: ~"all and (max-width: @{armazon-mobile-breakpoint}px)"; 	// Default
@@ -75,7 +69,6 @@ body {
 }
 *, *:before, *:after {
 	box-sizing: inherit;
-//	.transition();
 }
 
 // --------------------------------------------
@@ -97,7 +90,6 @@ a {
 }
 a:active, a:hover {
 	outline: 0;
-//	color: @armazon-color-foreground;
 	color: #fff;
 	border-bottom: solid @armazon-color-primary 1px;
 }
@@ -194,7 +186,6 @@ dl {
 // --------------------------------------------
 // --------------------------------------------
 // Author's custom styles :
-
 @ui-margin : 20px;
 @ui-header-height : 60px;
 @ui-footer-height : 50px;
@@ -220,7 +211,6 @@ h1, h2, h3, dl, dt, dd, ul, li, p {
 	padding: 0;
 	list-style: none;
 }
-
 
 body {
 	padding: 0 @ui-sidebar-width 0 0;
@@ -280,7 +270,6 @@ body {
 				}
 			}
 		}
-
 	}
 
 	section {
@@ -306,7 +295,6 @@ body {
 			overflow: auto;
 			resize: none;
 			font-size: 1.8rem;
-
 			box-shadow:
 				0 2px 40px 5px fade(#000, 20%),
 				0 1px 0 1px fade(#000, 10%)
@@ -366,27 +354,22 @@ body {
 				}
 			}
 		}
-
 	}
 }
-
 
 #sidebar {
 	position: absolute;
 	top: 0;
 	right: 0;
-
 	width: @ui-sidebar-width;
 	height: 100%;
 	overflow: auto;
-
 	background: fade(#000, 10%);
 	box-shadow:
 		-1px 0 0 fade(#fff, 5%),
 		inset 1px 0 0 fade(#000, 10%),
 		inset 3px 0 0 fade(#000, 5%)
 	;
-
 	padding: 0 @ui-margin @ui-margin @ui-margin;
 
 	h3 {
@@ -418,11 +401,8 @@ body {
 			text-align: center;
 			color: @armazon-color-primary;
 		}
-
 	}
-
 }
-
 
 body.no-sidebar {
 	padding: 0;
@@ -442,11 +422,8 @@ body.no-sidebar {
 	}
 }
 
-
 #sidebar {
-
 	dl {
-
 		width: @ui-sidebar-width - (@ui-margin * 2);
 
 		dt {
@@ -479,7 +456,6 @@ body.no-sidebar {
 				color: #fff;
 				border-bottom: solid fade(#fff, 50%) 1px;
 			}
-
 		}
 
 		dd {
@@ -509,15 +485,10 @@ body.no-sidebar {
 			dt:after {
 				content: '\f054'; // chevron-right
 			}
-			dd {
-				// display: none;
-			}
+			dd {}
 		}
-
 	}
 }
-
-
 
 
 #helper {
@@ -603,18 +574,14 @@ body.no-sidebar {
 		}
 	}
 }
+
 .dissolve-transition {
-//	position: absolute;
-//	top: 5px;
 	transition: all .25s ease;
 	opacity: 1;
 }
 .dissolve-enter, .dissolve-leave {
 	opacity: 0;
-//	top: -5px;
 }
-
-
 
 ul.option-list {
 	padding: 5px 10px;
@@ -636,7 +603,6 @@ ul.option-list {
 		}
 	}
 }
-
 
 button,
 html input[type="button"],
@@ -683,45 +649,6 @@ input[type="button"] {
 		}
 	}
 }
-
-
-
-
-/*
-
-button:hover, button:focus,
-html input[type="button"]:hover, html input[type="button"]:focus,
-input[type="button"]:hover, input[type="button"]:focus {
-	text-decoration: none;
-	background: @armazon-color-foreground;
-	color: @armazon-color-background;
-	border: none;
-	outline: 0;
-}
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-input {
-	line-height: normal;
-}
-*/
-
-/*
-#characters-mapped {
-
-	margin: 20px 0 0 0;
-	li {
-		display: inline-block;
-		padding: 5px;
-		margin: 2px;
-		border-radius: 5px;
-		background: #fafafa;
-	}
-}
-*/
-
 
 #sidebar, body {
 	.transition();

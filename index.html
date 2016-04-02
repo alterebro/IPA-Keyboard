@@ -64,7 +64,11 @@
 			@keyup="onKeyUp"
 			@keypress="onKeyPress"
 			@keydown="onKeyDown"
-			placeholder="_lang._placeholder"></textarea>
+			placeholder="_lang._placeholder"
+			autocomplete="off"
+			autocorrect="off"
+			autocapitalize="off"
+			spellcheck="false"></textarea>
 
 		<div v-if="helper_chars.length" transition="dissolve" id="helper" v-bind:style="{ top: helper_coordinates.top + 'px', left: helper_coordinates.left + 'px' }">
 			<dl>

@@ -200,7 +200,6 @@ var lang = {
 	}
 }
 
-
 var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	input_data : '',
 	default_keymap : 'IPA-Full',
@@ -253,6 +252,8 @@ var data = {
 	}
 };
 
+
+
 var started = 0;
 //Vue.config.debug = true;
 //Vue.config.devtools = true;
@@ -267,11 +268,10 @@ var app = new Vue({
 		this.calc_helper_offset();
 		this.create_placeholder();
 		this.socialLinks();
-
+		window.addEventListener('resize', this.closeHelper);
 	},
 
 	filters : {
-
 		beautify : function(str) {
 			return str.replace(/-/g, ' ');
 		},
@@ -312,6 +312,7 @@ var app = new Vue({
 		toogle_sidebar : function() {
 			this.hide_sidebar = !this.hide_sidebar;
 			this.saveAppState();
+			this.closeHelper();
 		},
 		toggle_menu_type : function() {
 			this.aside_menu_type_open = !this.aside_menu_type_open;
@@ -393,7 +394,6 @@ var app = new Vue({
 			this.init();
 		},
 		setLang(param) {
-			console.log(param);
 			this.current_lang = param;
 			this.lang = lang[param];
 			this.create_placeholder();
@@ -415,7 +415,6 @@ var app = new Vue({
 		},
 
 		cycleHelperChar : function() {
-
 			var cl = this.helper_chars.length;
 			if( cl > 0 ) {
 
@@ -430,6 +429,7 @@ var app = new Vue({
 		},
 
 		openHelper : function(chars) {
+			this.helper_chars_current = -1;
 			this.helper_chars = chars;
 		},
 		closeHelper : function() {
@@ -457,7 +457,6 @@ var app = new Vue({
 			var input_element = document.querySelector('#data-input');
 
 				Mousetrap.reset();
-
 				if (!started) { // ?
 
 					// Tab key
@@ -469,7 +468,7 @@ var app = new Vue({
 				}
 
 				// Delete key
-				Mousetrap(input_element).bind('backspace', function(e, combo) {
+				Mousetrap(input_element).bind(['space', 'backspace'], function(e, combo) {
 					self.closeHelper();
 				});
 
