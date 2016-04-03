@@ -344,7 +344,7 @@ var app = new Vue({
 			this.saveAppState();
 		},
 
-		helper_positioning(x,y) {
+		helper_positioning : function(x,y) {
 			this.helper_coordinates.top = x + this.helper_offset.top;
 			this.helper_coordinates.left = y + this.helper_offset.left;
 		},
@@ -403,7 +403,7 @@ var app = new Vue({
 			this.init();
 		},
 
-		setLang(param) {
+		setLang : function(param) {
 			this.current_lang = param;
 			this.lang = lang[param];
 			this.create_placeholder();

@@ -1,0 +1,36 @@
+{
+  "name": "ipa-keyboard",
+  "version": "1.0.0",
+  "description": "International Phonetic Alphabet Symbols Keyboard",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alterebro/IPA-Keyboard.git"
+  },
+  "keywords": [
+    "IPA",
+    "keyboard",
+    "phonetic",
+    "international",
+    "alphabet"
+  ],
+  "author": "Jorge Moreno aka Moro (www.moro.es, @alterebro)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/alterebro/IPA-Keyboard/issues"
+  },
+  "homepage": "https://github.com/alterebro/IPA-Keyboard#readme",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-htmlmin": "^1.3.0",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-useref": "^3.0.8",
+    "run-sequence": "^1.1.5"
+  }
+}
