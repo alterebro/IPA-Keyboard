@@ -38,7 +38,7 @@ gulp.task('compress', function(){
 // Build
 gulp.task('build', function (callback) {
     runSequence('clean:www',
-        ['compress', 'images', 'fonts', 'styles'],
+        ['compress', 'images', 'styles'],
         callback
     )
 })
