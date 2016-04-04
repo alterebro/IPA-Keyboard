@@ -23,45 +23,45 @@ function get_style(el,style_prop) {
 var started = 0;
 var maps = {
 	'IPA-Full' : {
-		'a' : ['ɑ','æ','ɐ','ɑ̃'],
+		'a' : ['ɑ','æ','ɐ'],
 		'b' : ['β','ɓ','ʙ'],
 		'c' : ['ɕ','ç'],
-		'd' : ['ð','ɖ','ɗ','d͡'],
+		'd' : ['ð','ɖ','ɗ'],
 		'e' : ['ə','ɚ','ɵ','ɘ'],
 		'3' : ['ɛ','ɜ','ɝ','ɛ̃','ɞ'],
 		'g' : ['ɠ','ɢ','ʛ','ɡ'],
 		'h' : ['ɥ','ɦ','ħ','ɧ','ʜ'],
-		'i' : ['ɪ','ɪ̈','ɨ'],
+		'i' : ['ɪ','ɨ'],
 		'j' : ['ʝ','ɟ','ʄ'],
 		'l' : ['ɫ','ɬ','ʟ','ɭ','ɮ'],
 		'm' : ['ɱ'],
 		'n' : ['ŋ','ɲ','ɴ','ɳ'],
-		'o' : ['ɔ','œ','ø','ɒ','ɔ̃','ɶ'],
+		'o' : ['ɔ','œ','ø','ɒ','ɶ'],
 		'p' : ['ɸ'],
 		'r' : ['ɾ','ʁ','ɹ','ɻ','ʀ','ɽ','ɺ'],
 		's' : ['ʃ','ʂ'],
-		't' : ['θ','ʈ','t͡'],
-		'u' : ['ʊ','ʊ̈','ʉ'],
+		't' : ['θ','ʈ'],
+		'u' : ['ʊ','ʉ'],
 		'v' : ['ʌ','ʋ','ⱱ'],
 		'w' : ['ʍ','ɯ','ɰ'],
 		'x' : ['χ'],
 		'y' : ['ʎ','ɣ','ʏ','ɤ'],
 		'z' : ['ʒ','ʐ','ʑ'],
 		'?' : ['ʔ','ʕ','ʢ','ʡ'],
-		' ' : ['d͡ʒ','t͡ʃ','t͡s']
+		' ' : ['d͡ʒ','t͡ʃ']
 	},
 	'IPA-for-English' : {
 		'a' : ['æ','ɑ','ɒ'],
 		'c' : ['ɔ'],
 		'd' : ['ð'],
 		'e' : ['ə','ᵊ','ɚ','ɜ','ɛ','ɝ'],
-		'i' : ['ɪ','ɪ̈'],
+		'i' : ['ɪ'],
 		'l' : ['ɫ'],
 		'n' : ['ŋ'],
 		'r' : ['ʳ','ɹ','ɾ'],
 		's' : ['ʃ'],
-		't' : ['θ','t̬'],
-		'u' : ['ʊ','ʊ̈'],
+		't' : ['θ'],
+		'u' : ['ʊ'],
 		'v' : ['ʌ'],
 		'z' : ['ʒ'],
 		'?' : ['ʔ']
@@ -186,7 +186,7 @@ var lang = {
 		_footer_created : 'Design &amp; development by',
 		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro',
 		_support_title : 'Support',
-		_support_desc : 'The IPA Keyboard has been done by Spanish Web Developer <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). It is free, it doesn\'t have annoying ads of any kind and you can help to keep it this way if you find it useful and get any value from it by suporting the app creator making a small donation!',
+		_support_desc : 'The IPA Keyboard is a personal project by <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). If you get any value from it and you find it useful, as it\'s a free app and doesn\'t have annoying ads of any kind, please consider making a donation to keep it this way!',
 		_support_donate : 'Donate via Paypal'
 	},
 	es : {
@@ -201,7 +201,7 @@ var lang = {
 		_footer_created : 'Diseño y desarrollo por',
 		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro',
 		_support_title : 'Colabora',
-		_support_desc : 'El teclado de simbolos AFI es una creación de <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). Esta app es gratis, no tiene anuncios molestos de ningún tipo y puedes contribuir a que siga de este modo si lo encuentras util y obtienes algún valor de el apoyando al creador de la app haciendole una pequeña donación!',
+		_support_desc : 'El teclado AFI es un proyecto personal de <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). Si obtienes algún valor y encuentras util esta app, ya que es gratis y no tiene molestos anuncios de ningún tipo, considera hacer un donativo para que siga siendo así!',
 		_support_donate : 'Donar via Paypal'
 	}
 }
@@ -406,6 +406,7 @@ var app = new Vue({
 		setLang : function(param) {
 			this.current_lang = param;
 			this.lang = lang[param];
+			this.saveAppState();
 			this.create_placeholder();
 		},
 
