@@ -1,0 +1,26 @@
+{
+    "main": "index.html",
+    "name": "IPA-Keyboard",
+    "description": "International Phonetic Alphabet Symbols Keyboard",
+    "version": "0.1.0",
+    "keywords": [ "IPA", "Keyboard", "International", "Phonetic", "Alphabet" ],
+    "window": {
+        "title": "IPA Keyboard",
+        "icon": "frontend/images/ipa-keyboard-icon.png",
+        "toolbar": false,
+        "frame": true,
+        "width": 900,
+        "height": 600,
+        "position": "center",
+        "min_width": 600,
+        "min_height": 300,
+        "max_width": 1400,
+        "max_height": 900
+    },
+    "webkit": {
+        "plugin": true
+    },
+    "dependencies": {
+        "deck":"latest"
+    }
+}

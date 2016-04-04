@@ -35,10 +35,25 @@ gulp.task('compress', function(){
     .pipe(gulp.dest('www'))
 });
 
-// Build
+// Build dist /www
 gulp.task('build', function (callback) {
     runSequence('clean:www',
         ['compress', 'images', 'styles'],
         callback
     )
+})
+
+// Build bin /build
+var NwBuilder = require('nw-builder');
+gulp.task('nw', function() {
+
+    var nw = new NwBuilder({
+        version: '0.11.0',
+        files: './src/**',
+        macIcns: './src/frontend/images/ipa-keyboard.icns',
+        macPlist: {mac_bundle_id: 'ipaKeyboard'},
+        platforms: ['osx64']
+    });
+
+    return nw.build();
 })
