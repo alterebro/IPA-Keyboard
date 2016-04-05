@@ -1,12 +1,14 @@
-# IPA-Keyboard
+# IPA Keyboard: [git.io/ipa](http://git.io/ipa)
 
-### IPA Keyboard prototype built with vue.js, gulp and nw.js. International Phonetic Alphabet Symbols Keyboard -  Responsive Web Application and standalone Desktop Application for Mac OSX, Windows and Linux.
+**International Phonetic Alphabet Symbols** Web and Desktop Application built using Vue.js, Gulp and Node-Webkit (nw.js). Responsive Cross-Browser Web Application and standalone Desktop Cross-Plattform Application for Mac OSX, Windows and Linux.
 
-*This is still a work in progress. No binaries released yet.*<br />Copyright © 2016 Jorge Moreno ( [@alterebro](https://twitter.com/alterebro) )
+- **Web App** : [http://alterebro.github.io/IPA-Keyboard/](http://alterebro.github.io/IPA-Keyboard/)
 
-![IPA Keyboard](src/frontend/images/ipa-keyboard-screenshot.png)
+*This is still a work in progress. No binaries released yet. Packages can be built using instructions below.*
 
-### Project Build
+[![IPA Keyboard](src/frontend/images/ipa-keyboard-screenshot.png)](http://alterebro.github.io/IPA-Keyboard/)
+
+## Build
 
 **Requirements** : **[Node.js](https://nodejs.org/en/)** and **[gulp](http://gulpjs.com/)**. Download and Install Node.js if you don't have it installed already on your computer from the [node website](https://nodejs.org/en/), install **gulp** globally. In case you have a previous gulp version run `npm rm --global gulp` in order to avoid collision with the *gulp-cli*.
 
@@ -27,5 +29,34 @@ $ gulp build
 $ gulp nw
 ```
 
+## Publish
 
+Public website is generated on the `www/` folder and located on the gh-pages branch ( [http://alterebro.github.io/IPA-Keyboard/](http://alterebro.github.io/IPA-Keyboard/) ).
+Build it with gulp and push only that folder to gh-pages.
 
+```bash
+# ... do your changes
+# Build the www distributable folder
+$ gulp build
+
+# ... pushing master
+$ git status
+$ git add .
+$ git commit -m 'commit message'
+$ git push origin master
+
+# push www/ to gh-pages
+$ git subtree push --prefix www/ origin gh-pages
+```
+
+## Credits
+
+**IPA Keyboard** by Jorge Moreno aka moro ([moro.es](http://moro.es), [@alterebro](https://twitter.com/alterebro))
+
+- Built using :
+    - **[NW.js (node-webkit)](http://nwjs.io/)** lets you call all Node.js modules directly from DOM and enables writing native applications with Web technologies.
+    - **[Gulp](http://gulpjs.com/)** Task runner, streaming build system.
+    - **[Vue.js](http://gulpjs.com/)** Reactive Components for Modern Web Interfaces.
+
+---
+Copyright © 2016 Jorge Moreno

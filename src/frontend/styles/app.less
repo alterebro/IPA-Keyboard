@@ -501,6 +501,7 @@ body.no-sidebar {
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
 	padding: 9px 0 0 0;
+	opacity: 0;
 
 	&:before, &:after {
 		content: '';
@@ -577,10 +578,10 @@ body.no-sidebar {
 
 .dissolve-transition {
 	transition: all .25s ease;
-	opacity: 1;
+	opacity: 1 !important;
 }
 .dissolve-enter, .dissolve-leave {
-	opacity: 0;
+	opacity: 0 !important;
 }
 
 ul.option-list {

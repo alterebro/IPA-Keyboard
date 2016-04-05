@@ -186,7 +186,7 @@ var lang = {
 		_footer_created : 'Design &amp; development by',
 		_placeholder : 'Hi there! Welcome to the IPA Keyboard. \nHere you can write your text using the International Phonetic Alphabet Symbols.\n\n - When the helper window appears, use the tab key to cycle through the special characters.\n - You can switch the Keyboard type by selecting it on the sidebar options menu.\n\nHappy IPA writing!\n@alterebro',
 		_support_title : 'Support',
-		_support_desc : 'The IPA Keyboard is a personal project by <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). If you get any value from it and you find it useful, as it\'s a free app and doesn\'t have annoying ads of any kind, please consider making a donation to keep it this way!',
+		_support_desc : 'The IPA Keyboard is a personal project still in development, help to make it better by sending your comments and bugs found to the developer <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). This App is free and doesn\'t have annoying ads of any kind, please consider making a donation to keep it this way if you get any value from it!',
 		_support_donate : 'Donate via Paypal'
 	},
 	es : {
@@ -201,7 +201,7 @@ var lang = {
 		_footer_created : 'Diseño y desarrollo por',
 		_placeholder : 'Hola! Bienvenido al teclado AFI. \nAquí podrás escribir tus textos usando los simbolos del Alfabeto Fonético Internacional.\n\n - Cuando aparezca la ventana de ayuda, usa la tecla de tabulador para desplazarte por los carácteres.\n - Puedes cambiar el tipo de teclado seleccionandolo en el menu de opciones lateral.\n\nFeliz escritura AFI!\n@alterebro',
 		_support_title : 'Colabora',
-		_support_desc : 'El teclado AFI es un proyecto personal de <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). Si obtienes algún valor y encuentras util esta app, ya que es gratis y no tiene molestos anuncios de ningún tipo, considera hacer un donativo para que siga siendo así!',
+		_support_desc : 'El teclado AFI es un proyecto personal todavía en desarrollo, ayuda a hacerlo mejor mandando tus comentarios y errores que puedas encontrar al desarrolador <strong>Jorge Moreno</strong> (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>). Esta aplicación es gratis y no tiene molestos anuncios de ningún tipo, considera hacer un donativo para que siga siendo así en caso de que obtengas algún valor de su uso!',
 		_support_donate : 'Donar via Paypal'
 	}
 }
@@ -257,7 +257,7 @@ var data = {
 
 	metadata : {
 		title : 'IPA Keyboard',
-		description : 'IPA Keyboard. International Phonetic Alphabet Symbols',
+		description : 'IPA Keyboard. International Phonetic Alphabet Symbols Web Application.',
 		url : 'http://alterebro.github.io/IPA-Keyboard/'
 	},
 	textarea : document.querySelector('#data-input'),
@@ -501,3 +501,13 @@ var app = new Vue({
 		}
 	}
 });
+
+
+// Google Analytics Tracking ID
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-63335-24', 'auto');
+ga('send', 'pageview');
