@@ -2,9 +2,12 @@
 
 **International Phonetic Alphabet Symbols** Web and Desktop Application built using Vue.js, Gulp and Node-Webkit (nw.js). Responsive Cross-Browser Web Application and standalone Desktop Cross-Plattform Application for Mac OSX, Windows and Linux.
 
-- **Web App** : [http://alterebro.github.io/IPA-Keyboard/](http://alterebro.github.io/IPA-Keyboard/)
+- WebApp : **[http://alterebro.github.io/IPA-Keyboard/](http://alterebro.github.io/IPA-Keyboard/)**
+- Desktop App Pre-Release Binaries :
+    - **[Windows 64bit](http://bit.ly/1S7nScE)**
+    - **[Mac OSX 64](http://bit.ly/1W9d6sr)**
+    - **[Linux 64bit](http://bit.ly/1MPOxyw)**
 
-*This is still a work in progress. No binaries released yet. Packages can be built using instructions below.*
 
 [![IPA Keyboard](src/frontend/images/ipa-keyboard-screenshot.png)](http://alterebro.github.io/IPA-Keyboard/)
 
@@ -28,6 +31,9 @@ $ gulp build
 # Build the nwjs app
 $ gulp nw
 ```
+
+When building the desktop app for specific operating system, modify the gulpfile.js file where the `nw` task contains a platform array, these are the possible values : `['win32', 'win64', 'osx32', 'osx64', 'linux32', 'linux64']` Just select those you want to be built. More info about the builder option s on the `nw-builder` repo page ( https://github.com/nwjs/nw-builder )
+
 
 ## Publish
 

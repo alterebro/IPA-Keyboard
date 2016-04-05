@@ -53,11 +53,12 @@ var NwBuilder = require('nw-builder');
 gulp.task('nw', function() {
 
     var nw = new NwBuilder({
-        version: '0.11.0',
+        version: '0.12.3',
         files: './src/**',
         macIcns: './src/frontend/images/ipa-keyboard.icns',
         macPlist: {mac_bundle_id: 'ipaKeyboard'},
-        platforms: ['osx64']
+        // winIco : './src/frontend/images/ipa-keyboard.ico',
+        platforms: ['osx64', 'win64', 'linux64']
     });
 
     return nw.build();
