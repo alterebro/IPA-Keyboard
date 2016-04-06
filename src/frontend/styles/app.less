@@ -388,9 +388,9 @@ body {
 		cursor: default;
 
 		&:after {
-			content: '\f0ad';
+			content: '\f085';
 			font-family: 'FontAwesome';
-			font-size: 1.2rem;
+			font-size: 1.4rem;
 			display: block;
 			position: absolute;
 			top: (@ui-header-height - 40px) / 2;
@@ -432,6 +432,7 @@ body.no-sidebar {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
+			text-shadow: 0 1px 0 fade(#000, 50%);
 			position: relative;
 			padding: 0 40px 0 5px;
 			height: 40px;
@@ -600,6 +601,7 @@ ul.option-list {
 			display: block;
 			padding: 4px 0;
 			color: @armazon-color-primary;
+			text-shadow: 0 -1px 0 fade(#000, 50%);
 			&:hover { color: #fff; }
 		}
 	}
@@ -619,34 +621,39 @@ input[type="button"] {
 }
 
 #characters-mapped {
-	li {
-		display: block;
-		float: left;
-	}
+	li {}
 	button {
 		display: block;
 		float: left;
 		width: 2.6rem;
 		height: 2.6rem;
-		margin: 0 2px 2px 0;
+		font-size: 1.2rem;
+		margin: 1px;
+		&:hover {
+			-ms-transform: scale(1.5);
+			-webkit-transform: scale(1.5);
+			transform: scale(1.5);
+		}
 	}
 	button.char-trigger {
-		background: fade(#000, 5%);
+		background: fade(#000, 10%);
 		color: @armazon-color-foreground;
-		font-size: 1.2rem;
+		text-shadow: 0 -1px 0 fade(#000, 75%);
 		font-weight: bold;
+		box-shadow: inset -1px 0 0 darken(@armazon-color-primary, 15%);
 		&:hover {
-			background: fade(#000, 25%);
+			background: #000;
+			color: #fff;
+			box-shadow: none;
 		}
 	}
 	button.char-item {
 		background: @armazon-color-primary;
 		color: @armazon-color-background;
+		text-shadow: 0 1px 0 fade(#fff, 25%);
+		border-radius: 1px;
 		&:hover {
 			background: #fff;
-			-ms-transform: scale(1.5);
-			-webkit-transform: scale(1.5);
-			transform: scale(1.5);
 		}
 	}
 }
@@ -659,6 +666,8 @@ input[type="button"] {
 	padding: 15px;
 	font-size: 90%;
 	line-height: 1.6;
+	color: lighten(@armazon-color-neutral, 15%);
+	text-shadow: 0 -1px 0 fade(#000, 50%);
 
 	strong {
 		color: #fff;
