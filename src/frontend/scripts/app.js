@@ -315,6 +315,9 @@ var app = new Vue({
 		this.create_placeholder();
 		this.socialLinks();
 		window.addEventListener('resize', this.closeHelper);
+		window.setTimeout(function() {
+			document.querySelector('body').classList.remove('preload');
+		}, 2000);
 
 	},
 
