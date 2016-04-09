@@ -256,6 +256,9 @@ var app_state = JSON.parse(localStorage.getItem('IPA-Keyboard-settings')) || {
 	menu_help_open : false,
 	sidebar_hidden : false
 };
+// Force language if found in URL > http:://url/path/?en
+var url_lang = location.search.slice(1,3);
+app_state.default_lang = (lang[url_lang] && (location.search.length ==3)) ? url_lang : app_state.default_lang;
 
 // ------------------------------------------------
 // ------------------------------------------------
