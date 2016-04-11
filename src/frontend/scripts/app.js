@@ -231,7 +231,7 @@ var lang = {
 		label : 'Español',
 		_title : 'Teclado AFI',
 		_tagline : 'Alfabeto Fonético Internacional.',
-		_helper_desc : 'Usa el Tabuador &#8677; para desplazarte',
+		_helper_desc : 'Usa el Tabulador &#8677; para desplazarte',
 		_options_menu : 'Menu de Opciones',
 		_keyboard_type : 'Tipo de Teclado',
 		_current_keys : 'Carácteres asociados',
@@ -241,6 +241,21 @@ var lang = {
 		_support_title : 'Colabora',
 		_support_desc : 'El teclado AFI es un proyecto personal todavía en desarrollo, ayuda a hacerlo mejor mandando tus comentarios y los errores que puedas encontrar al desarrollador (<a href="https://twitter.com/alterebro" target="_blank" title="Jorge Moreno. @alterebro">@alterebro</a>).<br />Esta aplicación es gratis y no tiene molestos anuncios de ningún tipo, considera hacer un donativo para que siga siendo así en caso de que obtengas algún valor de su uso!',
 		_support_donate : 'Donar via Paypal'
+	},
+	fr : {
+		label : 'Français',
+		_title : 'API Clavier',
+		_tagline : 'Alphabet Phonétique International.',
+		_helper_desc : 'Utilisez la touche Tab &#8677; pour passer',
+		_options_menu : 'Options du Menu',
+		_keyboard_type : 'Type de clavier',
+		_current_keys : 'Caractères associés',
+		_ui_lang : 'Interface Langue',
+		_footer_created : 'Design &amp; développement par',
+		_placeholder : 'Salut! Bienvenue sur le clavier API. \nIci vous pouvez écrire votre texte en utilisant les symboles de l\'alphabet phonétique international.\n\n - Lorsque la fenêtre d\'aide apparaît, utilisez la touche de tabulation pour faire défiler les caractères spéciaux.\n - Vous pouvez changer le type de clavier en le sélectionnant dans le menu des options de la barre latérale. \n\nBonne écriture API! \n@alterebro',
+		_support_title : 'Collaborer',
+		_support_desc : 'Le clavier API est un projet personnel encore en développement, aider à faire mieux en envoyant vos commentaires et les bugs trouvés pour le développeur (<a href="https://twitter.com/alterebro" target="_ blank" title="Jorge Moreno. @alterebro">@alterebro</a>).<br />Cette application est libre et n\'a pas de publicités ennuyeuses de toute nature, envisager de faire un don à garder de cette façon si vous obtenez une valeur de utiliser!',
+		_support_donate : 'Faire un don via Paypal'
 	}
 }
 
