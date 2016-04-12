@@ -27,6 +27,12 @@ gulp.task('images', function(){
     .pipe(gulp.dest('www/frontend/images'))
 });
 
+gulp.task('root_files', function(){
+    return gulp.src('src/cache.appcache')
+    .pipe(imagemin())
+    .pipe(gulp.dest('www'))
+});
+
 gulp.task('icons', function() {
     return gulp.src(['src/frontend/images/ipa-keyboard.icns', 'src/frontend/images/ipa-keyboard.ico'])
     .pipe(gulp.dest('www/frontend/images'))
@@ -43,7 +49,7 @@ gulp.task('compress', function(){
 // Build dist /www
 gulp.task('build', function (callback) {
     runSequence('clean:www',
-        ['compress', 'images', 'icons', 'styles'],
+        ['compress', 'images', 'root_files', 'icons', 'styles'],
         callback
     )
 })
