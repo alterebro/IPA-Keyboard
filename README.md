@@ -65,4 +65,6 @@ $ git subtree push --prefix www/ origin gh-pages
     - **[Vue.js](http://gulpjs.com/)** Reactive Components for Modern Web Interfaces.
 
 ---
+
+The **IPA Keyboard** is [MIT licensed](https://github.com/alterebro/IPA-Keyboard/blob/master/LICENSE).
 Copyright © 2016 Jorge Moreno
