@@ -3,10 +3,10 @@
 **International Phonetic Alphabet Symbols** Web and Desktop Application built using Vue.js, Gulp and Node-Webkit (nw.js). Responsive Cross-Browser Web Application and standalone Desktop Cross-Plattform Application for Mac OSX, Windows and Linux.
 
 - WebApp : **[http://alterebro.github.io/IPA-Keyboard/](http://alterebro.github.io/IPA-Keyboard/)**
-- Desktop App Pre-Release Binaries :
-    - **[Windows 64bit](http://bit.ly/1S7nScE)**
-    - **[Mac OSX 64](http://bit.ly/1W9d6sr)**
-    - **[Linux 64bit](http://bit.ly/1MPOxyw)**
+- Desktop App Pre-Release Binaries ( [v1.0-alpha pre-release page](https://github.com/alterebro/IPA-Keyboard/releases) ) :
+    - **[Windows 64bit](https://github.com/alterebro/IPA-Keyboard/releases/download/1.0.0/ipa-keyboard-win64.zip)**
+    - **[Mac OSX 64](https://github.com/alterebro/IPA-Keyboard/releases/download/1.0.0/ipa-keyboard-osx64.zip)**
+    - **[Linux 64bit](https://github.com/alterebro/IPA-Keyboard/releases/download/1.0.0/ipa-keyboard-linux64.zip)**
 
 
 [![IPA Keyboard](src/frontend/images/ipa-keyboard-screenshot.png)](http://alterebro.github.io/IPA-Keyboard/)
