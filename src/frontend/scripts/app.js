@@ -274,7 +274,23 @@ var lang = {
 		_support_title : 'Collaborer',
 		_support_desc : 'Le clavier API est un projet personnel encore en développement, aider à faire mieux en envoyant vos commentaires et les bugs trouvés pour le développeur (<a href="https://twitter.com/alterebro" target="_ blank" title="Jorge Moreno. @alterebro">@alterebro</a>).<br />Cette application est libre et n\'a pas de publicités ennuyeuses de toute nature, envisager de faire un don à garder de cette façon si vous obtenez une valeur de utiliser!',
 		_support_donate : 'Faire un don via Paypal'
+	},
+	de : {
+		label : 'Deutsche',
+		_title : 'IPA-Tastatur',
+		_tagline : 'Internationale phonetische Alphabet-Symbole.',
+		_helper_desc : 'Drücken Sie die Tabulatortaste &#8677; um durchzublättern',
+		_options_menu : 'Optionsmenü',
+		_keyboard_type : 'Tastaturtyp',
+		_current_keys : 'Aktuelle Tastenbelegung',
+		_ui_lang : 'UI-Schnittstellensprache',
+		_footer_created : 'Design &amp; Entwicklung von',
+		_placeholder : 'Hallo! Willkommen auf der IPA-Tastatur. \nHier können Sie Ihren Text mit den International Phonetic Alphabet Symbols schreiben.\n\n - Wenn das Hilfsfenster angezeigt wird, verwenden Sie die Tabulatortaste, um durch die Sonderzeichen zu blättern.\n - Sie können den Tastaturtyp wechseln, indem Sie ihn im Optionenmenü der Seitenleiste auswählen. \n\nGlückliches IPA Schreiben! \n@alterebro',
+		_support_title : 'Unterstützung',
+		_support_desc : 'Das IPA Keyboard ist ein persönliches Projekt, das noch in der Entwicklung ist. Es hilft, es besser zu machen, indem es seine Kommentare und Fehler an den Entwickler sendet (<a href="https://twitter.com/alterebro" target="_ blank" title="Jorge Moreno. @alterebro">@alterebro</a>).<br />Diese App ist kostenlos und hat keine lästigen Anzeigen jeglicher Art. Bitte denken Sie daran, eine Spende zu machen, um es auf diese Weise zu halten, wenn Sie irgendeinen Wert daraus ziehen können!!',
+		_support_donate : 'Spenden Sie über Paypal'
 	}
+
 }
 
 // ------------------------------------------------
